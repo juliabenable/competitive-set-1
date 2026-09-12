@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fully Loaded &middot; Cross-Platform Pricing Study</title>
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#17171A; --ink-soft:#6B6B70; --line:#E7E7E9; --panel:#FAFAFA;
+  --blue:#2D7DD2; --blue-bg:#EAF2FC; --blue-line:#C9DCF3;
+  --purple:#8B5CF6; --purple-bg:#F1EBFC;
+  --orange:#F0A23C; --orange-bg:#FDF1E1;
+  --warn:#8A6D1D; --warn-bg:#FBF4E2;
+  --good:#1F7A4D; --good-bg:#E9F6EF;
+  --bad:#B23A2E; --bad-bg:#FBEAE8;
+  --teal:#1F5F5B; --teal-bg:#EAF3F2;
+  --sidebar-w:250px;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15.5px; line-height:1.62;}
+a{color:var(--blue);}
+h1,h2,h3,h4{font-family:var(--sans);}
+
+.sidebar{
+  position:fixed; top:0; left:0; bottom:0; width:var(--sidebar-w);
+  border-right:1px solid var(--line); padding:26px 20px; overflow-y:auto;
+}
+.sidebar h1{font-size:20px; font-weight:700; margin:0 0 4px;}
+.sidebar .sub{font-size:12px; color:var(--ink-soft); margin-bottom:22px; line-height:1.5;}
+.sidebar nav a{
+  display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink-soft); text-decoration:none;
+  padding:6px 0 6px 10px; border-left:2px solid transparent; margin-left:-10px;
+}
+.sidebar nav a .num{font-family:var(--mono); font-size:10.5px; color:var(--ink-soft); background:var(--panel); width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;}
+.sidebar nav a:hover{color:var(--ink);}
+.sidebar nav a.active{color:var(--blue); border-left-color:var(--blue); font-weight:600;}
+.sidebar nav a.active .num{background:var(--blue-bg); color:var(--blue);}
+.sidebar .legend{margin-top:22px; padding-top:16px; border-top:1px solid var(--line); display:grid; gap:6px;}
+.sidebar .legend .pair{display:flex; align-items:center; gap:7px; font-size:11px; color:var(--ink-soft);}
+
+.main{margin-left:var(--sidebar-w); padding:44px 56px 100px; max-width:1300px;}
+
+/* Q&A cards */
+.qa{list-style:none; margin:0 0 8px; padding:0; display:grid; gap:8px;}
+.qa li{border:1px solid var(--line); border-radius:10px; padding:13px 16px; background:var(--panel);}
+.qa .q{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.01em; color:var(--ink); margin-bottom:6px; line-height:1.4;}
+.qa p{margin:0; font-weight:400; max-width:none; font-size:14px; line-height:1.55;}
+.qa .rm{display:inline-block; margin-top:6px; font-size:12px; font-weight:600;}
+.also{margin-top:26px;}
+.also h3{margin-top:0;}
+
+section{padding:36px 0 40px; border-bottom:1px solid var(--line); scroll-margin-top:20px;}
+section:last-of-type{border-bottom:none;}
+h2{font-size:21px; font-weight:700; margin:0 0 18px; display:flex; align-items:center; gap:10px;}
+h2 .num{
+  font-family:var(--mono); font-size:12px; color:var(--blue); background:var(--blue-bg);
+  width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.section-note{font-size:13.5px; color:var(--ink-soft); margin:-10px 0 20px; max-width:none;}
+h3{font-size:15px; font-weight:700; margin:24px 0 10px;}
+h4{font-size:14px; font-weight:700; margin:0 0 6px;}
+p{margin:0 0 13px; max-width:none;}
+ul, ol{margin:0 0 14px; padding-left:20px;}
+li{margin-bottom:7px;}
+ul.plain{list-style:none; padding-left:0;}
+ul.plain li{padding-left:16px; position:relative; max-width:none;}
+ul.plain li::before{content:'\2013'; position:absolute; left:0; color:var(--ink-soft);}
+
+.tag{display:inline-block; font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; padding:2px 8px; border-radius:10px; margin-left:6px; vertical-align:middle; white-space:nowrap;}
+.tag.confirmed{background:var(--blue-bg); color:var(--blue);}
+.tag.claimed{background:var(--purple-bg); color:var(--purple);}
+.tag.said{background:var(--panel); color:var(--ink-soft); border:1px solid var(--line);}
+.tag.assumed{background:var(--orange-bg); color:#95650F;}
+.tag.open{background:var(--warn-bg); color:var(--warn);}
+
+.block-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:16px 0;}
+.block-grid.two{grid-template-columns:1fr 1fr;}
+.block{border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:var(--panel);}
+.block.accent{border-color:var(--blue-line); background:var(--blue-bg);}
+.block h4{margin:0 0 8px;}
+.block ul{margin:0; padding-left:18px; font-size:13.5px;}
+.block ul li{margin-bottom:5px;}
+.block p{font-size:13.5px; margin-bottom:0;}
+@media (max-width:900px){.block-grid, .block-grid.two{grid-template-columns:1fr;}}
+
+.flag{background:var(--warn-bg); border-left:3px solid var(--warn); padding:12px 16px; margin:14px 0; font-size:14px; border-radius:0 4px 4px 0;}
+.flag b{color:var(--warn); font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:4px;}
+.flag.accent{background:var(--blue-bg); border-left-color:var(--blue);}
+.flag.accent b{color:var(--blue);}
+.flag p{margin:0; max-width:none;}
+.flag p+p{margin-top:6px;}
+
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:14px;}
+.two-col h4{margin-top:0;}
+@media (max-width:900px){.two-col{grid-template-columns:1fr;} .sidebar{position:static; width:100%; height:auto; border-right:none; border-bottom:1px solid var(--line);} .main{margin-left:0;}}
+
+.quote{font-style:italic;}
+.src{font-size:12px; color:var(--ink-soft);}
+
+.tablewrap{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px;}
+table{border-collapse:collapse; width:100%; font-size:13.5px;}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+th{font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); background:var(--panel); white-space:nowrap;}
+tr:last-child td{border-bottom:none;}
+td.n,th.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+td .note{display:block; font-size:11.5px; color:var(--ink-soft); margin-top:2px; white-space:normal;}
+td.n .tag{display:block; margin:3px 0 0 auto; width:fit-content;}
+.table-filters{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+.table-filters button{padding:6px 13px; font-size:13px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; color:var(--ink-soft);}
+.table-filters button.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+a.platform-link{font-weight:600; text-decoration:none; border-bottom:1px dashed var(--blue-line);}
+a.platform-link:hover{border-bottom-style:solid;}
+tr.is-benable td{background:var(--teal-bg);}
+tr.is-benable td:first-child{font-weight:700; color:var(--teal);}
+td.name{font-weight:600; white-space:nowrap;}
+
+/* collapsible toggle panels (method, benable includes/excludes) */
+details.toggle-panel{border:1px solid var(--line); border-radius:10px; background:var(--panel); margin:12px 0; overflow:hidden;}
+details.toggle-panel summary{cursor:pointer; padding:13px 18px; font-weight:600; font-size:14px; list-style:none; display:flex; align-items:center; gap:8px; user-select:none;}
+details.toggle-panel summary::-webkit-details-marker{display:none;}
+details.toggle-panel summary::before{content:'+'; font-family:var(--mono); color:var(--blue); font-weight:700; width:14px;}
+details.toggle-panel[open] summary::before{content:'\2212';}
+details.toggle-panel .panel-body{padding:2px 20px 18px;}
+
+/* click-to-expand platform cards */
+.cat-group{margin-top:28px;}
+.cat-group h3{margin-bottom:8px;}
+details.platform-card{border:1px solid var(--line); border-radius:10px; margin-bottom:10px; background:#fff; overflow:hidden;}
+details.platform-card summary{cursor:pointer; padding:14px 18px; list-style:none; display:flex; align-items:center; gap:10px; user-select:none;}
+details.platform-card summary::-webkit-details-marker{display:none;}
+details.platform-card summary .name{font-weight:700; font-size:15px;}
+details.platform-card summary .kind{font-size:12px; color:var(--ink-soft); font-weight:400;}
+details.platform-card summary::after{content:'\25BE'; color:var(--ink-soft); font-size:12px; margin-left:auto;}
+details.platform-card[open] summary::after{content:'\25B4';}
+details.platform-card .card-body{padding:6px 18px 18px; border-top:1px solid var(--line); margin-top:2px; padding-top:14px;}
+
+/* calculator + $2K bar chart share this component */
+.calc{margin-top:16px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:20px;}
+.calc .controls{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; align-items:end;}
+@media (max-width:900px){.calc .controls{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.calc label{display:block; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px;}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+.seg button{padding:7px 12px; font-size:13.5px; color:var(--ink); background:#fff; border:none; cursor:pointer;}
+.seg button+button{border-left:1px solid var(--line);}
+.seg button[aria-pressed="true"]{background:var(--ink); color:#fff;}
+.calc input[type=number]{width:100%; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background:#fff; font:inherit;}
+.calc .toggle{display:inline-flex; align-items:center; gap:8px; font-size:13.5px;}
+.calc .toggle input{width:15px; height:15px; accent-color:var(--blue);}
+.bars{margin-top:16px; display:grid; gap:8px;}
+.bar{display:grid; grid-template-columns:220px 1fr 130px; gap:10px; align-items:center; font-size:13.5px;}
+.bar .lbl{font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.bar .lbl .sub{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; white-space:normal;}
+.bar .track{position:relative; height:20px; background:#fff; border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+.bar .fill{position:absolute; left:0; top:0; bottom:0; background:var(--line); border-radius:4px;}
+.bar .range{position:absolute; top:0; bottom:0; background:rgba(0,0,0,.06);}
+.bar.is-benable .fill{background:var(--teal);}
+.bar .val{text-align:right; font-variant-numeric:tabular-nums; font-weight:700;}
+.bar .val .sub{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; white-space:normal;}
+.bar.na .fill{background:transparent;}
+.bar.na .val{color:var(--ink-soft); font-weight:400;}
+@media (max-width:760px){.bar{grid-template-columns:130px 1fr 100px;}}
+.calc .foot{margin-top:12px; font-size:12.5px; color:var(--ink-soft);}
+.calc .foot p{max-width:none;}
+
+/* voices */
+.voice-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:10px;}
+@media (max-width:760px){.voice-grid{grid-template-columns:1fr;}}
+.voice{border-left:3px solid var(--good); background:var(--good-bg); border-radius:0 8px 8px 0; padding:10px 14px;}
+.voice.bad{border-left-color:var(--bad); background:var(--bad-bg);}
+.voice p{font-style:italic; margin:0 0 5px; max-width:none; font-size:13px; line-height:1.5;}
+.voice .src{font-size:11px; color:var(--ink-soft); font-style:normal; display:inline-block; padding:2px 8px; border-radius:10px; background:rgba(255,255,255,.6);}
+
+.honesty-box{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px 28px;}
+.gaps{list-style:none; padding:0; margin:0; display:grid; gap:8px;}
+.gaps li{font-size:13.5px; padding-left:16px; position:relative; max-width:none;}
+.gaps li::before{content:'\2013'; position:absolute; left:0; color:var(--ink-soft);}
+.gaps li .plat{font-weight:600;}
+
+.sources{margin-top:14px; columns:2; column-gap:32px; font-size:13px; color:var(--ink);}
+@media (max-width:900px){.sources{columns:1;}}
+.sources li{break-inside:avoid; margin-bottom:8px; list-style:none; padding-left:14px; position:relative; overflow-wrap:anywhere; max-width:none;}
+.sources li::before{content:''; position:absolute; left:0; top:.6em; width:4px; height:4px; border-radius:50%; background:var(--ink-soft);}
+#sources > p{max-width:none;}
+.verdict-split{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:14px;}
+@media (max-width:900px){.verdict-split{grid-template-columns:1fr;}}
+.verdict-box{border-radius:12px; padding:20px 22px;}
+.verdict-box.win{background:var(--good-bg); border:1px solid #cfe9d9;}
+.verdict-box.gap{background:var(--warn-bg); border:1px solid #f0e0b0;}
+.verdict-box h4{margin-top:0; display:flex; align-items:center; gap:9px; font-size:14.5px;}
+.verdict-box h4 .icon{width:22px; height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; flex:none;}
+.verdict-box.win h4 .icon{background:var(--good);}
+.verdict-box.gap h4 .icon{background:var(--warn);}
+.verdict-box ul.plain{margin-top:10px;}
+.category-filters{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:16px 0 14px;}
+.category-filters button{padding:6px 13px; font-size:13px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; color:var(--ink-soft);}
+.category-filters button.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+.category-filters .filter-spacer{flex:1 1 auto;}
+.category-filters #expand-all, .category-filters #collapse-all{color:var(--blue); border-color:var(--blue-line); background:var(--blue-bg);}
+details.platform-card summary{padding:10px 16px;}
+details.platform-card summary .name{font-size:14px;}
+details.platform-card summary .kind{font-size:11.5px;}
+</style>
+
+<style>
+/* top-right switch to the sales one-pagers */
+.to-sales{position:fixed;top:16px;right:20px;z-index:1000;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:8px;background:#7a5cfa;color:#fff;font:600 13px/1 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.12);transition:background 120ms}
+.to-sales:hover{background:#5f44d6;color:#fff}
+.to-sales span{font-size:11px;font-weight:500;opacity:.85}
+@media (max-width:640px){.to-sales{top:10px;right:10px;padding:8px 12px}.to-sales span{display:none}}
+@media print{.to-sales{display:none}}
+</style>
+</head>
+<body>
+<a class="to-sales" href="cards/">Sales one-pagers <span>Benable vs each competitor</span></a>
+<div class="sidebar">
+  <h1>Fully Loaded</h1>
+  <div class="sub">Cross-platform pricing study<br>Thirteen platforms, product excluded, next to Benable's own price.</div>
+  <nav id="toc">
+    <a href="#tldr"><span class="num">1</span>Answers at a glance</a>
+    <a href="#platforms"><span class="num">2</span>Platform by platform</a>
+    <a href="#pricing"><span class="num">3</span>Pricing across platforms</a>
+    <a href="#twok"><span class="num">4</span>The $2K scenario</a>
+    <a href="#voices"><span class="num">5</span>Voices</a>
+    <a href="#better"><span class="num">6</span>Wins and gaps</a>
+    <a href="#honesty"><span class="num">7</span>Open items</a>
+    <a href="#sources"><span class="num">8</span>Sources</a>
+  </nav>
+  <div class="legend">
+    <span class="pair"><span class="tag confirmed">Confirmed</span>vendor page or our own hands-on</span>
+    <span class="pair"><span class="tag claimed">Claimed</span>a third party</span>
+    <span class="pair"><span class="tag said">Said</span>a named person, dated</span>
+    <span class="pair"><span class="tag assumed">Assumed</span>stated in the text</span>
+    <span class="pair"><span class="tag open">Open</span>needs a signup or demo</span>
+  </div>
+</div>
+
+<div class="main">
+
+<section id="tldr">
+  <h2><span class="num">1</span>Answers at a glance</h2>
+  <ol class="qa" style="list-style:none; padding:0;">
+    <li>
+      <div class="q">What does a UGC-style video cost per video, across platforms?</div>
+      <p>$108 to $255 before product on a self-serve marketplace, $60 to $90 on Benable. Home From College $94 to $128, Collabstr $205, Insense $187 to $255. Benable's $60 to $90 per posted creator has the sourcing, chasing and review built in, which those numbers do not.</p>
+      <a class="rm" href="#pricing">See pricing across platforms &rarr;</a>
+    </li>
+    <li>
+      <div class="q">How do we compare apples to apples when some platforms gift product and charge a fee, others don't?</div>
+      <p>The gift is a wash. Every platform in this study ships or reimburses product for a physical good, so it cancels out on both sides. What differs is everything stacked on top: creator fee, platform fee, subscription, rights, and the brand's own hours.</p>
+      <a class="rm" href="#pricing">See pricing across platforms &rarr;</a>
+    </li>
+    <li>
+      <div class="q">What do Home From College and Kale charge, and can we offer in-person retail visits?</div>
+      <p>HFC runs $94 to $128 per posted video before product, self-serve below its $15K Premium tier. Kale's brand pricing isn't public and it pays customers, not creators, so it isn't a like-for-like comparator. Yes, a retail-visit variant of LOCAL would work, and cleaner than HFC's version.</p>
+      <a class="rm" href="#platforms">See platform by platform &rarr;</a>
+    </li>
+    <li>
+      <div class="q">A brand at $2,000 a month is comparing us to JoinBrands. Where are we better, and what does JoinBrands cost?</div>
+      <p>Self-serve, JoinBrands runs cheaper per video than it first looks, once usage rights are counted in. At volume it's about $54 all-in per post once the brand's own screening and chasing time is priced, versus Benable's roughly $50, and JoinBrands bundles perpetual usage rights at no extra cost, which we currently charge $50 to $100 for. Managed-to-managed is the clearer win: JoinBrands' team-run option is $6,875 at 100 creators a month, ours is $4,999, about 27% cheaper.</p>
+      <a class="rm" href="#platforms">See platform by platform &rarr;</a>
+    </li>
+    <li>
+      <div class="q">Fully loaded, what does JoinBrands actually charge per posted video, and who sets the price?</div>
+      <p>The brand sets it. $50 minimum per video pay-as-you-go, or $25 per video committed to a 100-post package. A quoted "$10 a video" blended rate comes from stacking cheap follow-on pieces onto an already-hired creator, not a real per-video price. Usage rights and a year-long Spark code are bundled in at every price point, including $25.</p>
+      <a class="rm" href="#platforms">See platform by platform &rarr;</a>
+    </li>
+  </ol>
+
+  <div class="also">
+    <h3>Also worth knowing</h3>
+    <ol class="qa" style="list-style:none; padding:0;">
+      <li>
+        <div class="q">Are content-only files a fair comparison to Benable?</div>
+        <p>They're cheaper, and not the same product. soona UGC $89 to $259, Billo $99 per file, full rights, nothing posted. Fair buys if the ask is ad creative, not reach.</p>
+        <a class="rm" href="#platforms">See platform by platform &rarr;</a>
+      </li>
+      <li>
+        <div class="q">Is Benable the cheapest option in the market, full stop?</div>
+        <p>No, not on the fee alone or the software alone. Stack Influence charges $30 to $39 per completed post; GRIN's self-serve tier is $50 of software per post. Benable's premium buys hand-picked creators and a team carrying the post-rate risk.</p>
+        <a class="rm" href="#better">See wins and gaps &rarr;</a>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="platforms">
+  <h2><span class="num">2</span>Platform by platform</h2>
+  <p>Where each platform beats Benable, and where Benable beats it, at a glance. Click any row's platform in the sections below for the full pricing, rights, and guarantee detail.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Platform</th><th>Category</th><th>Where they beat us</th><th>Where we beat them</th></tr></thead>
+      <tbody>
+        <tr class="is-benable"><td class="name">Benable</td><td>Managed, gifted only</td><td>&mdash;</td><td>This is the baseline every row below is measured against</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-joinbrands">JoinBrands</a></td><td>Self-serve</td><td>Usage rights bundled free at every price; real scale, 500K creators and 5,000 brands</td><td>Managed by default; curated quality; ~27% cheaper managed-to-managed</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-insense">Insense</a></td><td>Self-serve</td><td>Perpetual rights, ad plumbing, unlimited creators</td><td>2x to 4x cheaper loaded cost; no creator cash, no wallet float</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-billo">Billo</a></td><td>Cash for content</td><td>Owned ad assets, perpetual IP at $0, revisions</td><td>2x to 4x cheaper per posted creator; no expiring balances</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-trend">Trend / soona</a></td><td>Cash for content</td><td>Fixed, negotiation-free pricing from $89, licensing included at $0</td><td>Sells a post, not a file; no per-video minimum below Benable's floor</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-collabstr">Collabstr</a></td><td>Self-serve</td><td>Zero commitment, full refund on non-delivery, 1.2M listed creators</td><td>2x to 3x cheaper than market average; no labor of running an agency</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-socialcat">Social Cat</a></td><td>Self-serve, gifted</td><td>$10 to $20 per match, the cheapest gifted option</td><td>Everything after the product ships: sourcing, chasing, verification</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-minisocial">minisocial</a></td><td>Managed</td><td>Signed MSA, perpetual license, ad codes included</td><td>3x to 5x cheaper per posted creator</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-stack">Stack Influence</a></td><td>Managed</td><td>$30 to $39 per completed post, about half our fee</td><td>Brand can't pick creators there; rights stop at 6 months</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-statusphere">Statusphere</a></td><td>Managed</td><td>Warehouse fulfillment, guaranteed volume, bigger creators</td><td>Price, entry ticket ($699 vs $10,000), month-to-month</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-aspire">Aspire</a></td><td>Software</td><td>1M-creator marketplace, ad activation plumbing for a full team</td><td>Price certainty and labor, no full-time manager needed</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-grin">GRIN</a></td><td>Software</td><td>Cheaper software alone, about $50 a post</td><td>Our price includes the labor and post-rate risk theirs doesn't cover</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-upfluence">Upfluence</a></td><td>Software</td><td>Global scale, 12M-creator search</td><td>No 12-month lock, no $695 setup</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-hfc">Home From College</a></td><td>In-person / gig</td><td>In-person at scale, cash-paid under a signed contract, $49 floor</td><td>Fully managed; no student-runs-it burden on the brand</td></tr>
+        <tr><td class="name"><a class="platform-link" href="#pc-kale">Kale</a></td><td>Pays customers</td><td>Needs no product; cheaper at scale for brands with existing customers</td><td>Guaranteed, brand-approved volume from chosen creators with a brief</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Platforms in detail</h3>
+  <div class="category-filters" id="cat-filters">
+    <button data-cat="all" class="active">All 14</button>
+    <button data-cat="selfserve">Self-serve</button>
+    <button data-cat="managed">Managed and gifted</button>
+    <button data-cat="software">Software</button>
+    <button data-cat="inperson">In-person and pays-the-customer</button>
+    <span class="filter-spacer"></span>
+    <button type="button" id="expand-all">Expand all</button>
+    <button type="button" id="collapse-all">Collapse all</button>
+  </div>
+
+  <div class="cat-group" data-cat="selfserve">
+<details class="platform-card" id="pc-joinbrands">
+      <summary><span class="name">JoinBrands</span><span class="kind">Self-serve marketplace</span></summary>
+      <div class="card-body">
+        <p>A marketplace: the brand posts a campaign like a job listing, creators apply, the brand hires with a click and is charged when a creator accepts. 500K+ creators have signed up and been vetted, though most have completed zero jobs; a real search turned up barely 10 Level 3 creators and about 10 Level 2, everyone else Level 1. Confirmed hands-on in a full demo on Sep 10.</p>
+        <div class="block-grid">
+          <div class="block">
+            <h4>Two ways to pay</h4>
+            <ul>
+              <li>Content + Posting, pay-as-you-go: $50 minimum per video, no cap</li>
+              <li>Social Blasts, prepaid: commit to 100 posts, $25 each</li>
+              <li>15% platform fee on top if not on a paid plan</li>
+            </ul>
+          </div>
+          <div class="block">
+            <h4>Product and no-shows</h4>
+            <ul>
+              <li>95% of brands use reimbursement: creator buys, uploads a receipt, is paid after approval</li>
+              <li>Money sits in JoinBrands' escrow until then</li>
+              <li>Cancel a late or silent creator and the brand gets both the video fee and the reimbursement back</li>
+            </ul>
+          </div>
+          <div class="block accent">
+            <h4>Usage rights, bundled free</h4>
+            <ul>
+              <li>Perpetual usage rights on every approved video, at any price, including $25</li>
+              <li>TikTok Spark code collected at upload, valid one year, renewable</li>
+              <li>No extra fee at any tier</li>
+            </ul>
+          </div>
+        </div>
+        <p>The "$10 a video" number some brands hear is a blend: once a creator has done a $25 video, the brand can offer them $2 to $5 for a follow-on piece. Average five of those with the original $25 and the blended rate looks like $10 to $13. The real minimum is $50 pay-as-you-go, or $25 committed to a 100-post package.</p>
+        <p>Managed service costs $4,000 a month on top of creator costs; JoinBrands' own team launches the campaign, briefs, hires, chases and reviews, and the brand only approves the final content. Adoption is thin, under 20 of their 5,000 brands.</p>
+        <div class="block-grid two">
+          <div class="block">
+            <h4>Real example: Goli Supplements</h4>
+            <p>1,300 creators done, 1,500 more pending, sent into Target to buy the product and film it. $41.50 per job all in. 1.8 million impressions, roughly 1,000 to 1,400 views a post. Estimated spend: $120,000+ a month.</p>
+          </div>
+          <div class="block">
+            <h4>The real on-time rate</h4>
+            <p>JoinBrands' rep claimed under 5% of jobs run late. On a live campaign pulled up on the call, 51 of 140 jobs on one page were late, and most of the next page too, closer to 30 to 40%.</p>
+          </div>
+        </div>
+        <div class="two-col">
+          <div>
+            <h4>Where Benable is better</h4>
+            <ul class="plain">
+              <li>Managed by default; JoinBrands' self-serve product leaves finding, filtering, briefing, hiring, chasing and reviewing entirely to the brand, and its managed tier is $4,000 a month on top</li>
+              <li>Creator and content quality: a curated pool versus a marketplace where most creators have completed zero jobs</li>
+              <li>Managed-to-managed price: $4,999 versus JoinBrands' $6,875 at 100 creators a month, about 27% cheaper</li>
+              <li>Working toward a real on-time guarantee against a real 30 to 40% late rate on the other side</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Where JoinBrands is better, honestly</h4>
+            <ul class="plain">
+              <li>Usage rights fully bundled at cost, at every price point, including $25; Benable currently charges $50 to $100 extra</li>
+              <li>Scale: 500,000 creators and 5,000 active brands against Benable's tens of thousands and low tens</li>
+              <li>Self-serve per-post price is close once labor is priced in, about $54 all-in versus Benable's $50, and that's before crediting their bundled rights, not a clean win yet</li>
+              <li>No-show protection is structurally cleaner: the creator fronts the money, so a ghost costs the brand nothing but time, not product</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flag">
+          <b>Worth stealing</b>
+          <p>The reimbursement model itself: it puts the financial risk of a no-show on the creator, not the brand. Also worth copying: collecting usage rights preference at the point a creator already wants their payout, rather than negotiating it upfront. An internal poll suggests up to 40% of our creators would agree with no friction if simply asked.</p>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-insense">
+      <summary><span class="name">Insense</span><span class="kind">Self-serve marketplace with a paid trial</span></summary>
+      <div class="card-body">
+        <p>Brand writes a brief with a price range, creators bid inside it, escrow releases on approval. Perpetual paid-use rights on every paid deliverable.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>Trial from $650/mo, then $500/mo quarterly or $400 annual. Fee 20% / 10% / 7% on top by plan.</p></div>
+          <div class="block"><h4>Creator pay</h4><p>Brand sets a range; floors $100 to $125. Creators report being paid as low as $30.</p></div>
+          <div class="block"><h4>Rights</h4><p>Perpetual digital incl. paid and CTV; Spark and partnership ads priced monthly on top.</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Loaded cost per posted video: Insense runs 2x to 4x across scenarios</li><li>Zero creator cash, zero wallet float before every hire</li><li>No screening 20 to 40 applications per brief yourself</li></ul></div>
+          <div><h4>Where Insense is better</h4><ul class="plain"><li>Rights: perpetual, paid use, raw footage as an option</li><li>Ad plumbing: partnership ads, Spark codes, Meta and TikTok partner badges</li><li>Content-only jobs and unlimited creators</li></ul></div>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-billo">
+      <summary><span class="name">Billo</span><span class="kind">Pay-per-video content shop</span></summary>
+      <div class="card-body">
+        <p>Now branded a "creator marketing platform." Brief, non-influencer creators apply, brand ships product, buys a finished 15 to 120 second video from a prepaid Pack. Nothing posts unless the brand buys a creator-priced add-on.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>$99 per video entry, prepaid packs $500 to $30,000 valid 12 months. <span class="tag claimed">Claimed</span></p></div>
+          <div class="block"><h4>Creator pay</h4><p>$30 new, $70 premium creators for a 15-second video, about 30% of the $99.</p></div>
+          <div class="block"><h4>Rights</h4><p>Full IP assignment on payment; ad permissions are 30-day rentals.</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Price per posted creator, plausibly 2x to 4x cheaper</li><li>Labor: brand screens hundreds of applicants, ships in 2 days</li><li>Billing calm against reported expiring balances and markups</li></ul></div>
+          <div><h4>Where Billo is better</h4><ul class="plain"><li>Owned ad assets: perpetual IP at $0, downloadable files, revisions</li><li>Extras: b-roll, expert editing, longer formats</li><li>Buy here for ad creative, not reach</li></ul></div>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-trend">
+      <summary><span class="name">Trend, now soona UGC</span><span class="kind">Fixed-price content marketplace</span></summary>
+      <div class="card-body">
+        <p><strong>Correction from an earlier pass: this already happened, it isn't a future date.</strong> soona announced Trend.io becoming "soona UGC" and began beta on Apr 30 2026. The credit-pack system described below is soona's own legacy Trend pricing, already being phased out; the live model going into any sales conversation now is the flat per-video price. Brand posts a free brief, creators apply, price is set by creator tier, brand ships product.</p>
+        <div class="block-grid">
+          <div class="block accent"><h4>Current price</h4><p>"Buy a single video starting at $89 per video," no credit package required. Video prices run $89 to $259 by creator tier; a possible $149 studio fee, waivable by membership. <span class="tag confirmed">Confirmed</span> soona.co, Sep 2026</p></div>
+          <div class="block"><h4>Legacy Trend pricing</h4><p>The old credit-pack system, $550 to $3,872 for prepaid credits (a Level 1 video worked out to about $91.67), is being retired as brands migrate to soona UGC.</p></div>
+          <div class="block"><h4>Rights</h4><p>"Unlimited Usage Rights, always," full licensing and distribution. No Spark or whitelisting product. <span class="tag confirmed">Confirmed</span> soona.co</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Reach: soona UGC sells a file, not a post</li><li>Legacy reviewers report no refunds when a Trend creator ghosted; unclear whether that policy carries over to soona UGC</li></ul></div>
+          <div><h4>Where soona UGC is better</h4><ul class="plain"><li>Fixed, negotiation-free prices starting at $89, licensing included at $0</li><li>No prepaid credit commitment now required at all</li></ul></div>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-collabstr">
+      <summary><span class="name">Collabstr</span><span class="kind">Pay-per-order marketplace</span></summary>
+      <div class="card-body">
+        <p>Creators list fixed-price packages; brand pays the price plus a hiring fee into escrow and gets a full refund on non-delivery. The most transparent price data in the market.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>Free, or Pro $249/mo annual to post a campaign. 10% hiring fee on top (5% Premium).</p></div>
+          <div class="block"><h4>Creator pay</h4><p>2026 actuals: UGC $154, TikTok $186, Instagram $193. $50 floor per collaboration.</p></div>
+          <div class="block"><h4>Rights</h4><p>Only if the order says so; otherwise approval-only license.</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Price against the market average, 2x to 3x per creator</li><li>Labor: Collabstr says it isn't an agency</li></ul></div>
+          <div><h4>Where Collabstr is better</h4><ul class="plain"><li>Zero commitment, full refund on non-delivery</li><li>1.2 million listed creators with public prices</li></ul></div>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-socialcat">
+      <summary><span class="name">Social Cat</span><span class="kind">Self-serve, gifted default</span></summary>
+      <div class="card-body">
+        <p>The cheapest way to put product in creators' hands: a subscription buys a monthly cap of "matches," gifted is the default, paid collabs settle off-platform with no fee. Social Cat doesn't manage the collaboration and, in writing, doesn't refund a ghost.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>$99 / $199 / $299 for 5 / 15 / 30 matches a month.</p></div>
+          <div class="block"><h4>Creator pay</h4><p>Gifted: product only. Paid: creator sets it, &euro;25 to &euro;500.</p></div>
+          <div class="block"><h4>Guarantee</h4><p>None. "We do not guarantee that any Creator will deliver."</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Social Cat is cheaper</h4><ul class="plain"><li>$10 to $20 of subscription per match, even at 50% delivery it stays under Benable</li></ul></div>
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Everything after the product ships: sourcing, chasing, verification, not losing product to ghosts</li></ul></div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="cat-group" data-cat="managed">
+<details class="platform-card" id="pc-minisocial">
+      <summary><span class="name">minisocial</span><span class="kind">Managed micro-influencer + UGC</span></summary>
+      <div class="card-body">
+        <p>The managed comparator that pays creators cash. One public number: projects start at $3,000 for a campaign of 10 creators, creator payments included.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>$300 per posted creator, net-15 invoice, non-refundable service fee.</p></div>
+          <div class="block"><h4>Rights</h4><p>Perpetual, plus 30 days of ad access baked in (whitelisting, Spark, partnership ads).</p></div>
+          <div class="block"><h4>Guarantee</h4><p>Written replacement-or-credit on the creator-payment slice.</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Price, 3x to 5x per posted creator, same "we run it" promise</li></ul></div>
+          <div><h4>Where minisocial is better</h4><ul class="plain"><li>A signed MSA, perpetual license, ad codes included, case-study roster</li></ul></div>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-stack">
+      <summary><span class="name">Stack Influence</span><span class="kind">Managed, pay per completed post</span></summary>
+      <div class="card-body">
+        <p>The closest structural rival to Benable and the cheapest managed fee in the market: $30 flat fee on average per creator post, no monthly subscription. The catch: nano creators (about 2,500 followers average) buy the product at full retail and are reimbursed; the brand can't pick them, minimum 50 to 100 creators per product over two months.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>$39 list, $30 average, about $20 at scale, charged only on completed posts.</p></div>
+          <div class="block"><h4>Product</h4><p>Brand never ships; reimburses retail plus shipping plus tax weekly.</p></div>
+          <div class="block"><h4>Rights</h4><p>Full rights for up to 6 months; no whitelisting.</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Stack Influence is cheaper</h4><ul class="plain"><li>$30 to $39 per completed post, about half of Benable's, a third at 50+ a month</li></ul></div>
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Who posts: brand can't select or filter on Stack; rights stop at 6 months; brand fronts weekly reimbursements and lives with return abuse</li></ul></div>
+        </div>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-statusphere">
+      <summary><span class="name">Statusphere</span><span class="kind">Managed, "guaranteed posts"</span></summary>
+      <div class="card-body">
+        <p>The managed platform with the biggest promise and ticket: "guaranteed posts," product fulfilled from their warehouse in 48 hours, entry "starting at $10,000." Per-post price isn't public.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>$10,000 entry; third parties cite a $3,500/mo floor on an annual contract.</p></div>
+          <div class="block"><h4>Per post</h4><p>Statusphere's own benchmark for the category: $100 to $300. <span class="tag open">Open</span></p></div>
+          <div class="block"><h4>Rights</h4><p>Organic perpetual; paid limited to one year.</p></div>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Price, entry ticket ($699 vs $10,000), brand approval, month-to-month</li></ul></div>
+          <div><h4>Where Statusphere is better</h4><ul class="plain"><li>Warehouse fulfillment, guaranteed volume, larger creators, rights in writing</li></ul></div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="cat-group" data-cat="software">
+<details class="platform-card" id="pc-aspire">
+      <summary><span class="name">Aspire</span><span class="kind">Enterprise SaaS plus agency layer</span></summary>
+      <div class="card-body">
+        <p>Discovery, a 1M-creator marketplace, briefs, Shopify gifting, ad permissions. No public pricing page. Vendr median actual spend $15,588/yr ($1,299/mo). <span class="tag claimed">Claimed</span></p>
+        <p>Software alone is $130 per posted video at 10/mo. Add the field norm that 61% of gifted product never gets posted, plus labor, and it lands at $280 to $350 per gifted posted video.</p>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-grin">
+      <summary><span class="name">GRIN</span><span class="kind">SaaS, month-to-month credits</span></summary>
+      <div class="card-body">
+        <p>Re-priced twice in 2026, now a month-to-month credit ladder fronted by an AI agent, "Gia." Free to $1,500/mo on credits, no annual contract. Growth ($500) covers 10 gifted posts at $50 each, on software alone cheaper than Benable.</p>
+        <p>The honest pitch can't be "we're cheaper." It's: our price includes the 25 to 30 hours a month a DIY program costs, and the post-rate risk. GRIN publishes no hours-saved or post-rate data.</p>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-upfluence">
+      <summary><span class="name">Upfluence</span><span class="kind">Modular SaaS, 12-month minimum</span></summary>
+      <div class="card-body">
+        <p>About $125 of software per posted video at 10/mo, $50 at 25, before labor, on a year-long contract with a $695 setup.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="cat-group" data-cat="inperson">
+<details class="platform-card" id="pc-hfc">
+      <summary><span class="name">Home From College</span><span class="kind">Gen Z gig marketplace</span></summary>
+      <div class="card-body">
+        <p>A brand lists a "GIG," students apply, the brand picks, pays cash through the platform plus 20% on top. In-person work is a mature category: retail creator visits, in-store demos, campus sampling, gameday.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>Starter $49/mo (1 active); Standard $499/yr (10 active); Scale $999/yr (50 active); Premium from $15K/yr, 10% fee. All others +20%. <span class="tag confirmed">Confirmed</span> our own account</p></div>
+          <div class="block"><h4>Creator pay</h4><p>Own guidance: $75 to $100/video, $800/mo for a monthly GIG, confirmed live in our own test GIG.</p></div>
+          <div class="block"><h4>microGIG</h4><p>A faster product: AI-run tasks resolved in 48 hours or less. Confirmed example: $20 flat for one TikTok tagging a brand.</p></div>
+        </div>
+        <div class="flag">
+          <b>Watch</b>
+          <p>The form contract assigns full IP including paid media, plus name, likeness, voice and social handles, and reserves the company's right to "edit, adjust, or pro-rate any worker payment as deemed appropriate." Reinforced twice in-product: a compliance banner in every GIG chat, and a "Reminder!" modal citing possible legal action for off-platform payment.</p>
+        </div>
+        <div class="two-col">
+          <div><h4>Where Benable is better</h4><ul class="plain"><li>Everything managed; H\FC is DIY below its $15K tier, and the "student" often has no audience</li></ul></div>
+          <div><h4>Where HFC is better</h4><ul class="plain"><li>The physical world at scale (Vita Coco ran 50 ambassadors across 23 campuses), cash-paid deliverables under a signed contract, a $49 floor</li></ul></div>
+        </div>
+        <p><strong>Can we offer in-person retail visits?</strong> Yes, as a variant of LOCAL, cleaner than HFC's version: the creator buys at a named retailer, we reimburse at receipt value (that's the gift), posts the in-store video, we verify receipt and post. Watch-outs: receipt fraud (Kale solves it with linked cards) and creator footprint versus retailer footprint.</p>
+      </div>
+    </details>
+
+<details class="platform-card" id="pc-kale">
+      <summary><span class="name">Kale</span><span class="kind">Pays customers, not influencers</span></summary>
+      <div class="card-body">
+        <p>"Reward customers, not influencers." A brand funds a reward pool; Kale's algorithm pays customers who already own the product $10 to $25 per post based on views. No product shipped, no creator picked, no count promised. Brand pricing isn't public.</p>
+        <div class="block-grid">
+          <div class="block"><h4>Price</h4><p>Not public, demo only. <span class="tag said">Said</span> "Not self-serve for brands."</p></div>
+          <div class="block"><h4>Derived cost</h4><p>$44 to $200 per video from published cost-per-engagement cases. <span class="tag open">Open</span></p></div>
+          <div class="block"><h4>Product</h4><p>None; receipts and linked cards verify purchase.</p></div>
+        </div>
+        <p>Cheaper at scale and needs no product, which is why it comes up on calls, but it can't promise a count, pick a creator, or serve a brand with few existing customers. Steal the mechanic, not the pricing: receipt-as-proof is worth borrowing for a Benable "Retail Visit" type.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2><span class="num">3</span>Pricing across platforms</h2>
+  <p>Product cost is excluded from every number below, on every platform, because every platform ships or reimburses product for a physical good. What differs is everything stacked on top of it: creator fee, platform fee, subscription, rights, and the brand's own hours.</p>
+
+  <details class="toggle-panel">
+    <summary>Method: how the numbers below are built</summary>
+    <div class="panel-body">
+      <h4>The fully loaded formula</h4>
+      <div class="block-grid">
+        <div class="block"><h4>A. Subscription</h4><p>Divided by videos that month. $0 on pay-as-you-go; the largest line at low volume.</p></div>
+        <div class="block"><h4>B. Creator payout</h4><p>The job price the brand sets, or the price the creator lists. $0 on gifted-only collabs.</p></div>
+        <div class="block"><h4>C. Platform fee</h4><p>On top of B, on most marketplaces, 8% to 20%.</p></div>
+        <div class="block"><h4>D. Rights add-ons</h4><p>Paid usage, whitelisting, Spark codes, raw footage.</p></div>
+        <div class="block"><h4>E. The brand's hours</h4><p>Sourcing, briefing, chasing, reviewing. $0 only on managed services.</p></div>
+        <div class="block accent"><h4>Fully loaded per video</h4><p>A + B + C + D + E, product excluded.</p></div>
+      </div>
+      <h4>Three buckets, one rule each</h4>
+      <div class="block-grid">
+        <div class="block"><h4>Gifted only</h4><p>Benable, Stack Influence, Statusphere, gifted Social Cat, seeding in Aspire and GRIN. Brand pays a platform price and ships product; creator gets no cash.</p></div>
+        <div class="block"><h4>Gifted plus fee</h4><p>JoinBrands, Insense, Collabstr, minisocial, paid Social Cat, Home From College. Brand ships product and pays the creator.</p></div>
+        <div class="block"><h4>Cash for content</h4><p>Billo, Trend/soona. Fixed price per video, product still shipped, nothing posted to the creator's audience.</p></div>
+      </div>
+      <h4>Rules worth remembering</h4>
+      <ul class="plain">
+        <li>Quote competitors excluding product, and say so. Adding the gift to Benable's side would double count it.</li>
+        <li>Platforms that reimburse the creator for buying the product fold the product cost into the creator payment. Content-only shops sell a file, not a post, so their number buys less reach and more rights.</li>
+        <li>A posted video lives on the creator's own account and carries their audience. A content-only video is a file the brand posts or runs as an ad. The two are never mixed in this study.</li>
+        <li>Hours per video are assumed: 1.5 hrs on a self-serve marketplace, 3 hrs on a SaaS tool with no marketplace, 0.25 hrs on a managed service. <span class="tag assumed">Assumed</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="toggle-panel">
+    <summary>What Benable's price includes, and doesn't</summary>
+    <div class="panel-body">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Package</th><th class="n">Preferred rate</th><th class="n">Regular rate</th><th>Evidence</th></tr></thead>
+          <tbody>
+            <tr><td>10 creators / mo</td><td class="n">$699</td><td class="n">$899</td><td><span class="tag said">Said</span></td></tr>
+            <tr><td>15 creators / mo</td><td class="n">$899</td><td class="n">$1,099</td><td><span class="tag said">Said</span>, recommended start</td></tr>
+            <tr><td>25 creators / mo</td><td class="n">$1,499</td><td class="n">$1,899</td><td><span class="tag said">Said</span></td></tr>
+            <tr><td>50 creators / mo</td><td class="n">$1,999</td><td class="n">not quoted</td><td><span class="tag said">Said</span>, volume rate</td></tr>
+            <tr><td>5 creators / mo</td><td class="n">$199 to $299</td><td class="n">$299</td><td><span class="tag said">Said</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="two-col">
+        <div>
+          <h4>Includes</h4>
+          <ul class="plain">
+            <li>Gifted product only, fully managed, no influencer fees, no per-campaign fees</li>
+            <li>Creators cherry picked from the top 1% of our community, with profiles, linked socials, and a note on fit</li>
+            <li>A required in-feed post plus a recommendation on Benable, 90%+ post rate backed by the creator's card on file</li>
+            <li>Ops team handles invites, briefing, deadlines, content review, post tracking</li>
+            <li>Brand approves every creator and controls the brief; organic resharing included</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Doesn't include</h4>
+          <ul class="plain">
+            <li>Paid usage rights: capped at $100 per creator in one contract, one flat $50 to $75 fee elsewhere</li>
+            <li>Content-only UGC; the deliverable is a posted in-feed video, not a raw file</li>
+            <li>Spark or partnership ad codes, studied but not shipped</li>
+            <li>A written non-delivery guarantee: spoken "less than 5% flake rate," an extra slot next campaign on request</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <h3>The full table</h3>
+  <p class="section-note">Per video, product and shipping excluded, subscription amortized at ten videos a month, typical creator payout in cash. Each "if a creator ghosts" claim carries its own tag, since these came from different kinds of evidence, not one blanket source.</p>
+  <div class="table-filters" id="table-filters">
+    <button data-filter="all" class="active">All 13</button>
+    <button data-filter="gifted">Gifted only</button>
+    <button data-filter="giftfee">Gifted plus fee</button>
+    <button data-filter="cash">Cash for content</button>
+  </div>
+  <div class="tablewrap">
+    <table id="cmp">
+      <thead><tr>
+        <th>Platform</th><th>Model</th><th>Fee on creator pay</th><th class="n">Posted, 10/mo</th><th class="n">Posted, 25/mo</th><th class="n">Content-only, 10/mo</th><th>If a creator ghosts</th>
+      </tr></thead>
+      <tbody>
+        <tr class="is-benable" data-bucket="gifted"><td>Benable</td><td>Managed, gifted only</td><td>none</td><td class="n">$69.90</td><td class="n">$59.96</td><td class="n">not sold</td><td>"90%+ post rate," an extra slot next campaign on request <span class="tag said">Said</span> Tony</td></tr>
+        <tr data-bucket="giftfee"><td class="name">JoinBrands</td><td>Self-serve marketplace</td><td>15% on top</td><td class="n">$54 <span class="note">effective, w/ time</span></td><td class="n">$29</td><td class="n">$29 to $58</td><td>cancel a late or silent creator, get the video fee and the reimbursement back <span class="tag confirmed">Confirmed</span> demo, Sep 10 2026</td></tr>
+        <tr data-bucket="giftfee"><td class="name">Insense</td><td>Self-serve marketplace</td><td>20 / 10 / 7% on top</td><td class="n">$243 <span class="note">$187.50 at floor</span></td><td class="n">$213</td><td class="n">$215 <span class="note">$160 at floor</span></td><td>report an unresponsive creator after 3 days, funds return to wallet <span class="tag confirmed">Confirmed</span> Insense help center; subscription itself is non-refundable <span class="tag confirmed">Confirmed</span> ToS</td></tr>
+        <tr data-bucket="cash"><td class="name">Billo</td><td>Pay-per-video content shop</td><td>inside the price</td><td class="n">$149 to $249 <span class="tag open">Open</span></td><td class="n">same</td><td class="n">$99 <span class="note">$84 w/ pack bonus</span></td><td>2 reshoots + 2 edits included; unused balance refundable within 30 days, then a 25% admin fee <span class="tag confirmed">Confirmed</span> Billo Terms, Jun 2026</td></tr>
+        <tr data-bucket="cash"><td class="name">Trend / soona UGC</td><td>Fixed-price content marketplace</td><td>inside the price</td><td class="n">$89 to $259 <span class="note">current live price, not a credit pack</span></td><td class="n">same</td><td class="n">$89 to $259</td><td>"Unlimited Usage Rights, always" <span class="tag confirmed">Confirmed</span> soona.co; legacy Trend reviewers reported no refund on an unresponsive creator <span class="tag claimed">Claimed</span> Trustpilot, unclear if that carries to soona UGC</td></tr>
+        <tr data-bucket="gifted"><td class="name">Social Cat</td><td>Self-serve, gifted default</td><td>none, off-platform if paid</td><td class="n">$19.90 gifted <span class="note">$28 at 70% delivery</span></td><td class="n">$11.96</td><td class="n">not sold</td><td>"does not offer reimbursement," "does not guarantee that any Creator will deliver" <span class="tag confirmed">Confirmed</span> Social Cat help center and Terms</td></tr>
+        <tr data-bucket="giftfee"><td class="name">Collabstr</td><td>Pay-per-order marketplace</td><td>10% (5% Premium) on top</td><td class="n">$205</td><td class="n">$205</td><td class="n">$169</td><td>escrow, full refund if the creator doesn't deliver <span class="tag confirmed">Confirmed</span> Collabstr Terms</td></tr>
+        <tr data-bucket="giftfee"><td class="name">minisocial</td><td>Managed micro-influencer + UGC</td><td>inside the price</td><td class="n">$300</td><td class="n">$300</td><td class="n">included</td><td>written replacement-or-credit on the creator-payment slice; the service fee itself is non-refundable <span class="tag confirmed">Confirmed</span> minisocial MSA, Sep 4 2026</td></tr>
+        <tr data-bucket="gifted"><td class="name">Stack Influence</td><td>Managed, pay per completed post</td><td>$39 list / $30 avg</td><td class="n">$30 to $39</td><td class="n">$30 to $39</td><td class="n">not sold</td><td>"you only pay for completed influencer posts" <span class="tag confirmed">Confirmed</span> Stack Influence help center</td></tr>
+        <tr data-bucket="gifted"><td class="name">Statusphere</td><td>Managed, "guaranteed posts"</td><td>inside the price</td><td class="n">not public <span class="tag open">Open</span></td><td class="n">not public</td><td class="n">not sold</td><td>markets "guaranteed posts," but the public terms carry no explicit make-good and fees are non-refundable "under any circumstance" <span class="tag confirmed">Confirmed</span> Statusphere terms</td></tr>
+        <tr data-bucket="gifted"><td class="name">Aspire</td><td>Enterprise SaaS, annual</td><td>2% handling</td><td class="n">$130 sw <span class="note">$280 to $350 w/ labor</span></td><td class="n">$52 sw</td><td class="n">n/a</td><td>no guarantee; one reviewer reports being told there's no way to control creator behavior <span class="tag claimed">Claimed</span> Capterra, 2023</td></tr>
+        <tr data-bucket="gifted"><td class="name">GRIN</td><td>SaaS, month-to-month credits</td><td>0%</td><td class="n">$50 sw</td><td class="n">$40 sw</td><td class="n">n/a</td><td>no guarantee; the AI agent "Gia" sends follow-up nudges <span class="tag confirmed">Confirmed</span> GRIN product page</td></tr>
+        <tr data-bucket="gifted"><td class="name">Upfluence</td><td>Modular SaaS, 12-mo minimum</td><td>0%</td><td class="n">$125 sw</td><td class="n">$50 sw</td><td class="n">n/a</td><td>no guarantee; seeding is framed as having "no posting obligation" <span class="tag claimed">Claimed</span> third-party writeup</td></tr>
+        <tr data-bucket="giftfee"><td class="name">Home From College</td><td>Gen Z gig marketplace</td><td>20% (10% Premium)</td><td class="n">$94 <span class="note">$64 at street rate</span></td><td class="n">$93</td><td class="n">$94</td><td>pay only on completion, no replacement offered <span class="tag confirmed">Confirmed</span> our own account and contract</td></tr>
+        <tr data-bucket="cash"><td class="name">Kale</td><td>Pays customers per post</td><td>unknown</td><td class="n">$44 to $200 <span class="tag open">Open</span></td><td class="n">same</td><td class="n">n/a</td><td>no count promised; volume depends on the brand's own existing customer base <span class="tag claimed">Claimed</span> inferred from Kale's case studies</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-note">Only Social Cat (gifted, no guarantee), Stack Influence (nano, 50 minimum), and the software-only lines of GRIN and Aspire sit below Benable's $69.90. Every platform selling a posted video with the labor inside costs more.</p>
+
+  <h3>Run your own numbers</h3>
+  <p>The bars below use the same data and the same math as the table above, so you can change the assumptions instead of reading a fixed number. Pick a monthly volume, switch between a posted video and a content-only file, or turn on the brand's own hours to see how a self-serve marketplace stacks up against a managed service once someone has to do the work.</p>
+  <div class="calc">
+    <div class="controls">
+      <div><label>Videos a month</label><div class="seg" role="group"><button type="button" data-n="5">5</button><button type="button" data-n="10" aria-pressed="true">10</button><button type="button" data-n="15">15</button><button type="button" data-n="25">25</button><button type="button" data-n="50">50</button></div></div>
+      <div><label>Deliverable</label><div class="seg" role="group"><button type="button" data-mode="posted" aria-pressed="true">Posted video</button><button type="button" data-mode="content">Content-only file</button></div></div>
+      <div><label>Benable price</label><div class="seg" role="group"><button type="button" data-bp="preferred" aria-pressed="true">Preferred (to Sep 15)</button><button type="button" data-bp="regular">Regular</button></div></div>
+      <div><label>Include</label><div style="display:grid;gap:8px"><label class="toggle"><input type="checkbox" id="c-sub" checked> subscription, amortized</label><label class="toggle"><input type="checkbox" id="c-labor"> brand's hours at $<input type="number" id="c-rate" value="40" min="0" step="5" style="width:60px;display:inline-block;padding:2px 6px">/hr</label></div></div>
+    </div>
+    <div class="bars" id="bars" aria-live="polite"></div>
+    <div class="foot" id="calc-foot"></div>
+    <p class="section-note" style="margin-top:10px">Ghosted product isn't in these bars; on self-serve gifting it adds roughly 40% to the product line.</p>
+  </div>
+</section>
+
+<section id="twok">
+  <h2><span class="num">4</span>What $2,000 a month buys</h2>
+  <p class="section-note">Product excluded everywhere. Bar length is roughly how many posted videos $2,000 reaches; Benable's bar is highlighted.</p>
+  <div class="bars">
+    <div class="bar"><div class="lbl">JoinBrands<span class="sub">pay-as-you-go, brand runs every job</span></div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">35 to 69</div></div>
+    <div class="bar"><div class="lbl">Stack Influence<span class="sub">automated, brand can't pick creators</span></div><div class="track"><div class="fill" style="width:96%"></div></div><div class="val">51 to 66</div></div>
+    <div class="bar"><div class="lbl">Kale<span class="sub">if accepted; no picking, no brief</span></div><div class="track"><div class="fill" style="width:65%"></div></div><div class="val">10 to 45 <span class="tag open">Open</span></div></div>
+    <div class="bar"><div class="lbl">Home From College<span class="sub">Standard, the brand runs it</span></div><div class="track"><div class="fill" style="width:46%"></div></div><div class="val">16 to 32<span class="sub">or 2 monthly ambassadors</span></div></div>
+    <div class="bar"><div class="lbl">Collabstr, Free<span class="sub">9 at the $186 average; up to 30 at the $50 floor</span></div><div class="track"><div class="fill" style="width:43%"></div></div><div class="val">9 to 30</div></div>
+    <div class="bar is-benable"><div class="lbl">Benable<span class="sub">25-creator package, Benable's team runs it</span></div><div class="track"><div class="fill" style="width:36%"></div></div><div class="val">25<span class="sub">$501 left for product</span></div></div>
+    <div class="bar"><div class="lbl">Social Cat, Pro<span class="sub">30 matches, ~70% delivery</span></div><div class="track"><div class="fill" style="width:30%"></div></div><div class="val">~21<span class="sub">$1,701 left for product</span></div></div>
+    <div class="bar"><div class="lbl">Trend / soona UGC<span class="sub">the brand runs it; current per-video price, confirmed</span></div><div class="track"><div class="fill" style="width:32%"></div></div><div class="val">8 to 22</div></div>
+    <div class="bar"><div class="lbl">Billo<span class="sub">the brand picks and ships</span></div><div class="track"><div class="fill" style="width:14%"></div></div><div class="val">9 to 10 <span class="tag open">Open</span></div></div>
+    <div class="bar"><div class="lbl">Insense, Brand plan<span class="sub">7 at $175, 9 at the $125 floor</span></div><div class="track"><div class="fill" style="width:13%"></div></div><div class="val">7 to 9</div></div>
+    <div class="bar na"><div class="lbl">minisocial<span class="sub">doesn't reach the $3,000 project floor</span></div><div class="track"></div><div class="val">0</div></div>
+    <div class="bar na"><div class="lbl">Statusphere<span class="sub">below the $10,000 entry</span></div><div class="track"></div><div class="val">0</div></div>
+    <div class="bar na"><div class="lbl">Aspire / Upfluence<span class="sub">software only, subscription alone exceeds or consumes the budget</span></div><div class="track"></div><div class="val">0</div></div>
+    <div class="bar na"><div class="lbl">GRIN<span class="sub">Scale tier ($1,000) leaves room for a handful of paid micro posts, not gifted creators</span></div><div class="track"></div><div class="val">0 gifted</div></div>
+  </div>
+</section>
+
+<section id="voices">
+  <h2><span class="num">5</span>What brands and creators say, dated</h2>
+  <p class="section-note">Verbatim, from Trustpilot, Capterra and App Store. Reddit, G2 and X were blocked from this research environment on every platform, confirmed by repeated search, not a one-time miss.</p>
+  <h3>What's working</h3>
+  <div class="voice-grid">
+    <div class="voice"><p>"20$ per UGC and less headache to manage them is great for any beginning founder."</p><span class="src">Brand, Stack Influence, Trustpilot, Dec 2025</span></div>
+    <div class="voice"><p>"Every other social influencer platform does everything they can to stand between the brand and the creator. Collabstr has an easy searchable database."</p><span class="src">Brand, Collabstr, Trustpilot, Jan 2026</span></div>
+  </div>
+  <h3>What's not</h3>
+  <div class="voice-grid">
+    <div class="voice bad"><p>"I got a $900 bill from JoinBrands (pay as you go) and zero content produced."</p><span class="src">Brand, JoinBrands, Trustpilot, Jul 2026</span></div>
+    <div class="voice bad"><p>"When my subscription renewed for $1500 for 3 months I asked for it to be cancelled. They want to not honor the refund."</p><span class="src">Brand, Insense, Trustpilot, Mar 2026</span></div>
+    <div class="voice bad"><p>"After sending product, only 1 actually produced work for me. The other 3 disappeared."</p><span class="src">Brand, Social Cat, Trustpilot, Aug 2026</span></div>
+    <div class="voice bad"><p>"Billo seems to be applying a 300% markup in some cases."</p><span class="src">Brand, Billo, Trustpilot, Aug 2026</span></div>
+    <div class="voice bad"><p>"Bought a $500 credit and was told that it can no longer be used as it is past 12 months."</p><span class="src">Brand, Trend, Trustpilot, Jun 2026</span></div>
+    <div class="voice bad"><p>"UGC buyers double dip. They take the reimbursement and ALSO return the product to Amazon."</p><span class="src">Brand, Stack Influence, Trustpilot, 2025</span></div>
+    <div class="voice bad"><p>"$5 jobs, these are the only jobs that pop up these days."</p><span class="src">Creator, JoinBrands, App Store, May 2023</span></div>
+    <div class="voice bad"><p>"The payouts are very low for the work. There aren't higher tiers available, keeping earnings under $100/video."</p><span class="src">Creator, Billo, Capterra, Apr 2026</span></div>
+  </div>
+  <p class="section-note" style="margin-top:16px">Themes: expiring credits (Billo, Trend); refused refunds (Insense, Social Cat, GRIN); fees paid with nothing delivered (JoinBrands, Social Cat); creators vanishing after product ships (Social Cat, Trend); creator underpayment (Billo, Stack Influence). None of these complaint patterns exist in Benable's model.</p>
+</section>
+
+<section id="better">
+  <h2><span class="num">6</span>Wins and gaps</h2>
+  <div class="verdict-split">
+    <div class="verdict-box win">
+      <h4><span class="icon">&#10003;</span>Where Benable is better, on the evidence</h4>
+      <ul class="plain">
+        <li>Fully loaded posted video: $60 to $90 against JoinBrands, HFC, Collabstr, Insense, minisocial, Statusphere all running higher once the work is counted</li>
+        <li>No cash to creators, no fee stack; the price is the price</li>
+        <li>Labor is inside: self-serve tools push 20 to 250 applicant screens, shipping windows, and chase timers onto the brand</li>
+        <li>The post-rate risk is carried, not eaten by the brand</li>
+        <li>Billing calm: no expiring credits, no auto-renewals, no 12-month locks, no $10,000 entry</li>
+        <li>A real on-time story taking shape: content guarantee, SMS, and incentive programs like the Collective, against a market where the self-serve norm runs 30% to 40% of jobs late</li>
+      </ul>
+    </div>
+    <div class="verdict-box gap">
+      <h4><span class="icon">!</span>Where Benable is not better, and shouldn't pretend</h4>
+      <ul class="plain">
+        <li>The management fee: Stack Influence at $30 to $39 per completed post, about half of Benable's</li>
+        <li>Software alone: GRIN and Social Cat both undercut on subscription price</li>
+        <li>Content-only files: JoinBrands, soona, Trend, Billo all cheaper for ad creative</li>
+        <li>Rights in writing: JoinBrands bundles perpetual rights free at every price; Benable charges $50 to $100</li>
+        <li>A guarantee on paper: several competitors have one written down; ours is spoken</li>
+        <li>Scale and polish: JoinBrands alone has 500,000 creators and 5,000 active brands to Benable's tens of thousands and low tens, and years more time refining the experience</li>
+        <li>In-person reach: Home From College already runs retail visits, in-store demos, and campus activations at scale (one brand ran 50 ambassadors across 23 campuses); Benable's version is still a proposal, not a shipped product</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>The sales line, three versions</h3>
+  <div class="flag accent">
+    <b>Against a self-serve marketplace</b>
+    <p>"On those platforms you ship the product and pay about $110 to $250 per posted video plus a fee, plus your own time running every job. On Benable you ship the product and pay $60 to $90 per creator, and we run it."</p>
+  </div>
+  <div class="flag accent">
+    <b>Against a content shop</b>
+    <p>"They sell you a file for about $90 to $100, nobody posts it. We sell a creator posting to their own audience for $60 to $90. If you only need ad creative, buy the file; if you want people talking about you monthly, that's us."</p>
+  </div>
+  <div class="flag accent">
+    <b>Against a managed service</b>
+    <p>"Managed programs run $100 to $350 per post with a $3,000 to $10,000 entry, or $30 a post if you take whoever a machine picks in lots of a hundred. We're $60 to $90 per hand-picked creator, ten at a time, month to month."</p>
+  </div>
+
+  <div class="flag">
+    <b>Two numbers to fix before this goes out</b>
+    <p>The delivered post rate: every number here assumes Benable's 10, 15 or 25 are delivered posts. Pull last quarter's creators-live-over-contracted per brand from the portal before quoting any of this.</p>
+    <p>The "$150+ per influencer for managed" line holds against most of the market, with one named exception: Stack Influence at $30 to $39.</p>
+  </div>
+</section>
+
+<section id="honesty">
+  <h2><span class="num">7</span>Open items, by platform</h2>
+  <p class="section-note">Everything that still needs a signup, demo, or a second look, gathered in one place.</p>
+  <ul class="gaps">
+    <li><span class="plat">Billo:</span> the logged-in pricing page and creator rate cards for posting and ad permissions; several independent 2026 sources now cite $110 to $120 per video instead of $99, worth confirming which is current</li>
+    <li><span class="plat">Insense:</span> the two rate-card images (creator cost recommendations, Spark and partnership pricing)</li>
+    <li><span class="plat">Social Cat:</span> the feature is named "Replace Matches," a Pro-tier perk per third-party comparisons, but exactly how it works when a creator ghosts is still unconfirmed</li>
+    <li><span class="plat">Statusphere:</span> credit price per post format, credit expiry, whether $10,000 is one-time or per campaign</li>
+    <li><span class="plat">Stack Influence:</span> deposit size and refund terms, a real quote at 50 posts</li>
+    <li><span class="plat">minisocial:</span> deliverables per creator, the fee split, volume pricing at 25 and 50</li>
+    <li><span class="plat">Home From College:</span> applicant volume for a $50 retail-visit GIG in a mid-size city, whether the 20% fee applies to reimbursed purchases</li>
+    <li><span class="plat">Collabstr:</span> whether a product-only package can exist on a direct order</li>
+    <li><span class="plat">Trend / soona:</span> Pro and Elite per-video prices, whether the $149 studio fee hits UGC orders</li>
+    <li><span class="plat">Kale:</span> minimum budget, whether a fee sits on top of the reward pool, how coin and cash payouts reconcile</li>
+    <li><span class="plat">Aspire, GRIN, Upfluence:</span> a real Essentials quote at 10 to 25 creators; lower priority since labor already decides the comparison</li>
+    <li><span class="plat">Benable's own side:</span> delivered posts over contracted per brand last quarter, the rights statement a brand actually receives, a typical product COGS to plug in</li>
+  </ul>
+</section>
+
+<section id="sources">
+  <h2><span class="num">8</span>Sources</h2>
+  <p>Every number on this page traces to one of the sources below: a vendor's own pricing or help pages, a named review platform, a signed legal document, our own hands-on account, or the Sep 10 2026 JoinBrands demo. Reddit, G2 and X were checked and found unreachable from this research environment on every platform; that's a gap in coverage, not a source, and is noted here so it isn't mistaken for one.</p>
+  <ul class="sources">
+    <li>JoinBrands: joinbrands.com pricing and help center, Terms of Service section 3.4.2, Trustpilot (283 reviews), App Store, a full product demo with a JoinBrands rep on Sep 10 2026</li>
+    <li>Insense: insense.pro pricing and managed-service pages, Terms of Service, help center, Trustpilot (188 reviews), App Store (2,900 ratings)</li>
+    <li>Billo: billo.app help center and blog, Terms of Service (Jun 2026), App Store, Trustpilot (520 reviews), Capterra (13 reviews)</li>
+    <li>Trend / soona: trend.io pricing, soona.co UGC pages, the Trend-to-soona migration notice, creator terms, Trustpilot (7 reviews), Capterra (77 reviews)</li>
+    <li>Social Cat: thesocialcat.com pricing and Terms, help center, Trustpilot (364 reviews), Reviews.co.uk (2,774 reviews)</li>
+    <li>Collabstr: collabstr.com pricing, Terms, FAQ, Collabstr's own 2024 to 2026 creator-pricing reports, Trustpilot (462 reviews)</li>
+    <li>minisocial: minisocial.com homepage pricing, the minisocial Master Service Agreement (updated Sep 4 2026), creator terms, published case studies</li>
+    <li>Stack Influence: stackinfluence.com pricing, Intercom help center, Terms, Trustpilot (542 reviews), Better Business Bureau, a CMO interview (Dec 2025)</li>
+    <li>Statusphere: joinstatus.com pricing, legal terms, creator help center, Capterra (12 reviews)</li>
+    <li>Aspire, GRIN, Upfluence: each vendor's own pricing and help pages, Vendr (median actual spend data), Capterra, GetApp</li>
+    <li>Home From College: homefromcollege.com pricing and Terms, our own paid account, our own test GIG build and contractor agreement, screenshots through Sep 10 2026</li>
+    <li>Kale: getkale.com brand pages and help center, published case studies, tournament rules</li>
+    <li>Industry benchmarks: creator-economy rate guides and published survey data used to build the fully loaded formula in the method panel above</li>
+  </ul>
+</section>
+
+</div>
+
+<script>
+const PLATFORMS = [
+  { id:'benable', name:'Benable', kind:'Managed, gifted only',
+    tiers:[{n:'10 creators',monthly:699,cap:10},{n:'15 creators',monthly:899,cap:15},{n:'25 creators',monthly:1499,cap:25},{n:'50 creators',monthly:1999,cap:50}],
+    tiersRegular:[{n:'10 creators',monthly:899,cap:10},{n:'15 creators',monthly:1099,cap:15},{n:'25 creators',monthly:1899,cap:25},{n:'50 creators',monthly:1999,cap:50}],
+    posted:{payout:[0,0,0],fee:0}, content:null, laborHrs:0.25 },
+  { id:'joinbrands', name:'JoinBrands', kind:'Self-serve marketplace',
+    tiers:[{n:'Pay-as-you-go',monthly:0,cap:null,fee:0.15}],
+    posted:{payout:[25,35,50]}, content:{payout:[25,29,50]}, laborHrs:1.5 },
+  { id:'insense', name:'Insense', kind:'Self-serve marketplace',
+    tiers:[{n:'Trial $650',monthly:650,cap:10,fee:0.20},{n:'Brand $500 (quarterly)',monthly:500,cap:null,fee:0.10},{n:'Agency $800',monthly:800,cap:null,fee:0.07}],
+    posted:{payout:[125,175,300]}, content:{payout:[100,150,300]}, laborHrs:1.5 },
+  { id:'billo', name:'Billo', kind:'Pay-per-video UGC',
+    tiers:[{n:'No subscription',monthly:0,cap:null,fee:0}],
+    posted:{payout:[149,199,249],open:true}, content:{payout:[84,99,149]}, laborHrs:1.0 },
+  { id:'socialcat', name:'Social Cat', kind:'Self-serve marketplace',
+    tiers:[{n:'Essentials $99',monthly:99,cap:5,fee:0},{n:'Performance $199',monthly:199,cap:15,fee:0},{n:'Pro $299',monthly:299,cap:30,fee:0}],
+    posted:{payout:[0,0,100]}, content:null, laborHrs:1.5 },
+  { id:'collabstr', name:'Collabstr', kind:'Pay-per-order marketplace',
+    tiers:[{n:'Free',monthly:0,cap:null,fee:0.10},{n:'Pro $299',monthly:299,cap:null,fee:0.10},{n:'Premium $399',monthly:399,cap:null,fee:0.05}],
+    posted:{payout:[50,186,288]}, content:{payout:[50,154,215]}, laborHrs:1.5 },
+  { id:'trend', name:'Trend (soona UGC)', kind:'Fixed-price content marketplace',
+    tiers:[{n:'No subscription',monthly:0,cap:null,fee:0}],
+    posted:{payout:[89,120,259],open:false}, content:{payout:[89,120,259]}, laborHrs:1.0 },
+  { id:'stack', name:'Stack Influence', kind:'Managed, pay per completed post',
+    tiers:[{n:'$39 list, min 50 creators',monthly:0,cap:null,fee:0}],
+    posted:{payout:[20,35,39]}, content:null, laborHrs:0.25 },
+  { id:'aspire', name:'Aspire', kind:'SaaS, annual, demo-gated',
+    tiers:[{n:'Vendr median $1,299',monthly:1299,cap:null,fee:0.02}],
+    posted:{payout:[0,0,250]}, content:null, laborHrs:3.0 },
+  { id:'grin', name:'GRIN', kind:'SaaS, month-to-month credits',
+    tiers:[{n:'Growth $500 (100 creators)',monthly:500,cap:100,fee:0},{n:'Scale $1,000 (250)',monthly:1000,cap:250,fee:0}],
+    posted:{payout:[0,0,250]}, content:null, laborHrs:3.0 },
+  { id:'hfc', name:'Home From College', kind:'Gen Z gig marketplace',
+    tiers:[{n:'Starter $49/mo',monthly:49,cap:1,fee:0.20},{n:'Standard $499/yr',monthly:41.58,cap:10,fee:0.20},{n:'Scale $999/yr',monthly:83.25,cap:50,fee:0.20},{n:'Premium $15K/yr',monthly:1250,cap:null,fee:0.10}],
+    posted:{payout:[50,75,100]}, content:{payout:[50,75,100]}, laborHrs:1.5 },
+  { id:'minisocial', name:'minisocial', kind:'Managed, creators paid',
+    tiers:[{n:'$3,000 per 10-creator project',monthly:0,cap:null,fee:0}],
+    posted:{payout:[300,300,312]}, content:null, laborHrs:0.5 },
+  { id:'statusphere', name:'Statusphere', kind:'Managed, prepaid credits',
+    tiers:[{n:'$10,000 entry',monthly:0,cap:null,fee:0}],
+    posted:{payout:[100,200,350],open:true}, content:null, laborHrs:0.25 },
+  { id:'kale', name:'Kale', kind:'Pays customers per post',
+    tiers:[{n:'not public',monthly:0,cap:null,fee:0}],
+    posted:{payout:[44,120,200],open:true}, content:null, laborHrs:0.25 },
+];
+
+const state = { n:10, mode:'posted', sub:true, labor:false, rate:40, benablePrice:'preferred' };
+
+function bestTier(p, n){
+  const tiers = (p.id==='benable' && state.benablePrice==='regular') ? p.tiersRegular : p.tiers;
+  let best=null;
+  if(!state.sub){ const t=tiers[0]; return {t, fee:t.fee||0, total:0}; }
+  for(const t of tiers){
+    if(t.cap!==null && t.cap!==undefined && t.cap<n) continue;
+    const fee = t.fee||0;
+    const total = state.sub?t.monthly:0;
+    const cand = {t, fee, total};
+    if(!best || cand.total + n*fee*100 < best.total + n*best.fee*100) best=cand;
+  }
+  return best;
+}
+function perVideo(p, n){
+  const m = p[state.mode];
+  if(!m) return {na:true, why:'not sold'};
+  const bt = bestTier(p, n);
+  if(!bt) return {na:true, why:'over the largest tier'};
+  const fee = bt.fee;
+  const labor = state.labor ? p.laborHrs*state.rate : 0;
+  const calc = pay => (bt.total/n) + pay*(1+fee) + labor;
+  return { low:calc(m.payout[0]), typ:calc(m.payout[1]), high:calc(m.payout[2]), tier:bt.t.n, open:!!m.open, fee };
+}
+function money(x){ return '$' + (Math.round(x)).toLocaleString('en-US'); }
+function renderBars(){
+  const host = document.getElementById('bars'); if(!host) return;
+  const rows = PLATFORMS.map(p => ({p, r:perVideo(p, state.n)}));
+  const max = Math.max(...rows.filter(x=>!x.r.na).map(x=>x.r.high), 1);
+  rows.sort((a,b)=> (a.r.na?1e9:a.r.typ) - (b.r.na?1e9:b.r.typ));
+  host.innerHTML = rows.map(({p,r})=>{
+    if(r.na) return `<div class="bar na"><div class="lbl">${p.name}<span class="sub">${p.kind}</span></div><div class="track"></div><div class="val">n/a<span class="sub">${r.why}</span></div></div>`;
+    const w = Math.max(2, r.typ/max*100), lo = r.low/max*100, hi = r.high/max*100;
+    return `<div class="bar${p.id==='benable'?' is-benable':''}"><div class="lbl">${p.name}<span class="sub">${r.tier}${r.fee?` &middot; ${Math.round(r.fee*100)}% fee`:''}</span></div><div class="track"><div class="range" style="left:${lo}%;width:${Math.max(0,hi-lo)}%"></div><div class="fill" style="width:${w}%"></div></div><div class="val">${money(r.typ)}${r.open?' <span class="tag open">Open</span>':''}<span class="sub">${money(r.low)} to ${money(r.high)}</span></div></div>`;
+  }).join('');
+  const foot = document.getElementById('calc-foot');
+  if(foot){
+    const b = rows.find(x=>x.p.id==='benable');
+    foot.innerHTML = `<p>Per ${state.mode==='posted'?'posted':'content-only'} video at ${state.n} a month, product excluded${state.sub?', subscription amortized':', subscription excluded'}${state.labor?`, plus the brand's own hours at $${state.rate}/hr`:''}. Benable: ${b && !b.r.na ? money(b.r.typ) + ' on the ' + b.r.tier + ' package' : 'not sold as content-only'}.</p>`;
+  }
+}
+function wireCalc(){
+  document.querySelectorAll('[data-n]').forEach(b=>b.addEventListener('click',()=>{state.n=+b.dataset.n; document.querySelectorAll('[data-n]').forEach(x=>x.setAttribute('aria-pressed',x===b)); renderBars();}));
+  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{state.mode=b.dataset.mode; document.querySelectorAll('[data-mode]').forEach(x=>x.setAttribute('aria-pressed',x===b)); renderBars();}));
+  document.querySelectorAll('[data-bp]').forEach(b=>b.addEventListener('click',()=>{state.benablePrice=b.dataset.bp; document.querySelectorAll('[data-bp]').forEach(x=>x.setAttribute('aria-pressed',x===b)); renderBars();}));
+  const sub=document.getElementById('c-sub'); if(sub) sub.addEventListener('change',()=>{state.sub=sub.checked; renderBars();});
+  const lab=document.getElementById('c-labor'); if(lab) lab.addEventListener('change',()=>{state.labor=lab.checked; renderBars();});
+  const rate=document.getElementById('c-rate'); if(rate) rate.addEventListener('input',()=>{state.rate=Math.max(0,+rate.value||0); renderBars();});
+  renderBars();
+}
+(function(){
+  document.querySelectorAll('a.platform-link').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el){ el.setAttribute('open',''); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+})();
+(function(){
+  const expandBtn = document.getElementById('expand-all');
+  const collapseBtn = document.getElementById('collapse-all');
+  if(expandBtn) expandBtn.addEventListener('click', ()=>{
+    document.querySelectorAll('.platform-card').forEach(d=>d.setAttribute('open',''));
+  });
+  if(collapseBtn) collapseBtn.addEventListener('click', ()=>{
+    document.querySelectorAll('.platform-card').forEach(d=>d.removeAttribute('open'));
+  });
+})();
+(function(){
+  const filters = document.getElementById('cat-filters'); if(!filters) return;
+  const groups = document.querySelectorAll('.cat-group');
+  filters.querySelectorAll('button[data-cat]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filters.querySelectorAll('button[data-cat]').forEach(b=>b.classList.toggle('active', b===btn));
+      const cat = btn.dataset.cat;
+      groups.forEach(g=>{ g.style.display = (cat==='all' || g.dataset.cat===cat) ? '' : 'none'; });
+    });
+  });
+})();
+(function(){
+  const filters = document.getElementById('table-filters'); if(!filters) return;
+  const rows = document.querySelectorAll('#cmp tbody tr');
+  filters.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filters.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b===btn));
+      const f = btn.dataset.filter;
+      rows.forEach(r=>{
+        const show = f==='all' || r.classList.contains('is-benable') || r.dataset.bucket===f;
+        r.style.display = show ? '' : 'none';
+      });
+    });
+  });
+})();
+(function(){
+  const links=[...document.querySelectorAll('#toc a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-20% 0px -70% 0px'});
+  secs.forEach(s=>io.observe(s));
+})();
+document.addEventListener('DOMContentLoaded', wireCalc);
+if(document.readyState!=='loading') wireCalc();
+</script>
+</body>
+</html>

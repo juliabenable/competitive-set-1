@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benable vs</title>
+<!--
+SPEC ─────────────────────────────────────────────
+PURPOSE   Seven sales one-pagers, "Benable vs X", for Tony's Sep 10 ask:
+          what each competitor is better at, what Benable is better at, and an
+          all-in price comparison, sales-ready by Sep 18. v0 built from the
+          Sep 9 external study (competitor-pricing-study); Maricarmen's
+          hands-on pass and Benable's own post-rate number close the gaps.
+SCOPE     Working here: Sales / Prospect toggle (Prospect hides objections,
+          talk track and sources), Benable price toggle (Regular list, or the
+          preferred rate that ends Sep 15), print to Letter (one card per page).
+OUT       Nothing is a production surface.
+DATA      Competitor numbers are from public pricing pages and help centers
+          read Sep 9 2026 (screenshots in the study). Benable numbers are from
+          Tony's Sep 8 and Sep 10 package emails; JoinBrands facts from the
+          Sep 10 rep demo via Maricarmen's Sep 11 write-up. Estimates say so.
+DECISIONS - Product cost is excluded on both sides of every card: every
+            platform has the brand ship the product. Said in the footer.
+          - Posted video and content-only file are never mixed.
+          - Regular list price is the default because the cards ship after
+            Sep 15. Tony confirms the post-Sep 15 list before use.
+          - No em or en dashes anywhere (house rule for anything that leaves
+            the building).
+OPEN      Six items in the "Before this ships" panel at the top.
+QA        console/overflow/print-height run Sep 12 2026 (v1).
+──────────────────────────────────────────────────
+-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%237a5cfa%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-size=%2716%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27Arial%27 font-weight=%27700%27%3Evs%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#7a5cfa; --accent-deep:#5f44d6; --accent-tint:#efeaff; --accent-tint-2:#f7f4ff;
+  --text:#1c1c1c; --text-2:#4a4a4a; --text-3:#717171; --bg-weak:#f1f1f1; --bg-page:#f6f6f7; --surface:#ffffff; --border:#e3e3e3; --border-2:#d3d3d3;
+  --green:#167245; --green-tint:#ebf7ef; --amber:#8a5a0b; --amber-tint:#fbf1dc; --red:#a93226; --red-tint:#fbe9e7;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --r-8:8px; --r-16:16px; --r-full:999px;
+  --sh:0 4px 24px #00000014;
+  --card-w:816px; --card-h:1056px; --pad:40px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);font-size:14px;line-height:1.45;color:var(--text);background:var(--bg-page);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+strong{font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--text-3)}
+
+/* ---- app chrome (screen only) ---- */
+.bar{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.bar .t{font-weight:600;font-size:15px;margin-right:auto}
+.bar .t span{color:var(--text-3);font-weight:400;margin-left:8px;font-size:13px}
+.seg{display:inline-flex;border:1px solid var(--border-2);border-radius:var(--r-8);overflow:hidden;font-size:13px}
+.seg button{padding:6px 12px;color:var(--text-2);transition:background 120ms,color 120ms}
+.seg button+button{border-left:1px solid var(--border-2)}
+.seg button[aria-pressed="true"]{background:var(--text);color:#fff}
+.lbl{font-size:12px;color:var(--text-3);font-weight:500;margin-right:6px}
+.nav{display:flex;flex-wrap:wrap;gap:6px}
+.nav a{font-size:13px;padding:5px 10px;border-radius:var(--r-full);border:1px solid var(--border);color:var(--text-2);transition:background 120ms}
+.nav a:hover{background:var(--bg-weak)}
+.btn{padding:6px 12px;border-radius:var(--r-8);border:1px solid var(--border-2);font-size:13px;font-weight:500;background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.intro{max-width:var(--card-w);margin:24px auto 0;padding:0 8px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-16);padding:20px 24px;box-shadow:var(--sh)}
+.panel h2{font-size:16px;font-weight:600;margin-bottom:6px}
+.panel p{color:var(--text-2);font-size:13px;max-width:70ch}
+.panel ol{margin:10px 0 0 18px;font-size:13px;color:var(--text-2)}
+.panel ol li{margin-top:4px}
+.panel ol li b{color:var(--text);font-weight:600}
+.stack{display:grid;gap:24px;justify-content:center;padding:24px 8px 64px}
+
+/* ---- card ---- */
+.card{width:var(--card-w);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-16);padding:var(--pad);display:flex;flex-direction:column;gap:12px;box-shadow:var(--sh);font-size:11.5px;line-height:1.4;position:relative}
+.front{display:flex;flex-direction:column;gap:9px}
+#joinbrands .front{gap:8px}
+#joinbrands .sec ul{gap:3px}
+#joinbrands .sec{padding:7px 14px}
+#joinbrands .q2{padding:7px 14px}
+#joinbrands .box ul{gap:4px}
+#joinbrands .strip div{padding:6px 12px}
+#joinbrands .tile{padding:9px 16px}
+#joinbrands .box{padding:8px 14px}
+#joinbrands .line{padding:6px 14px}
+.back{display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px dashed var(--border-2)}
+.back h2{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3)}
+.card p{max-width:none}
+.head{display:flex;align-items:center;gap:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.head h1{font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.2}
+.head h1 em{font-style:normal;color:var(--accent)}
+.head .meta{margin-left:auto;text-align:right;font-size:11px;color:var(--text-3);line-height:1.35}
+.strip{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.strip div{padding:8px 12px;border-radius:var(--r-8);background:var(--bg-weak);font-size:11.5px;color:var(--text-2)}
+.strip div b{display:block;color:var(--text);font-weight:600;margin-bottom:2px}
+.strip div.us{background:var(--accent-tint-2);border:1px solid var(--accent-tint)}
+
+.price{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{border:1px solid var(--border);border-radius:var(--r-16);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline}
+.tile.us{border-color:var(--accent);background:var(--accent-tint-2)}
+.tile .who{grid-column:1/-1;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+.tile.us .who{color:var(--accent-deep)}
+.tile .big{font-size:30px;font-weight:700;letter-spacing:-0.02em;line-height:1;font-variant-numeric:tabular-nums}
+.tile .unit{font-size:12px;font-weight:600;color:var(--text)}
+.tile .sub{grid-column:1/-1;font-size:11px;color:var(--text-2);line-height:1.4}
+
+table{border-collapse:collapse;width:100%;font-size:10.5px}
+th,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);background:var(--bg-weak)}
+th:first-child,td:first-child{color:var(--text-3);width:22%}
+td.us{background:var(--accent-tint-2)}
+tr:last-child td{border-bottom:none}
+.tblwrap{border:1px solid var(--border);border-radius:var(--r-8);overflow:hidden}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.box{border:1px solid var(--border);border-radius:var(--r-16);padding:10px 14px}
+.box.us{border-color:var(--accent-tint);background:var(--accent-tint-2)}
+.box h3{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.box.us h3{color:var(--accent-deep)}
+.box ul{list-style:none;display:grid;gap:5px}
+.box ul li{position:relative;padding-left:16px;font-size:11px;color:var(--text-2)}
+.box ul li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.box ul li b{color:var(--text);font-weight:600}
+.box.them ul li::before{background:var(--border-2)}
+.box.them ul li .ans{display:block;margin-top:2px;color:var(--text);font-weight:500}
+.box.them ul li .ans::before{content:"Say: ";color:var(--accent-deep);font-weight:600}
+
+
+/* ---- Tony's structure ---- */
+.sec{border:1px solid var(--border);border-radius:var(--r-16);padding:9px 14px}
+.sec.us{border-color:var(--accent-tint);background:var(--accent-tint-2)}
+.sec h3{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.sec.us h3{color:var(--accent-deep)}
+.sec h4{font-size:11px;font-weight:600;color:var(--text-2);margin:8px 0 4px}
+.sec ul{list-style:none;display:grid;gap:4px}
+.sec ul li{position:relative;padding-left:14px;font-size:11px;color:var(--text-2);line-height:1.34}
+.sec ul li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--border-2)}
+.sec.us ul li::before{background:var(--accent)}
+.sec ul li b{color:var(--text);font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q2{border:1px solid var(--border);border-radius:var(--r-16);padding:9px 14px;background:var(--bg-weak)}
+.q2 h3{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.q2 .ptab{border:1px solid var(--border);border-radius:var(--r-8);overflow:hidden;background:var(--surface);margin:6px 0 8px}
+.q2 p{font-size:11px;color:var(--text-2);line-height:1.4}
+.q2 p+p{margin-top:4px}
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.incwrap h3{margin-bottom:4px}
+.inc h4{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-bottom:3px}
+.inc p{font-size:10.5px;line-height:1.38}
+.inc p.muted{margin-top:3px}
+.q2 p b{color:var(--text);font-weight:600}
+.think{border-left:3px solid var(--accent);background:var(--accent-tint-2);padding:8px 12px;border-radius:0 var(--r-8) var(--r-8) 0;font-size:11px;color:var(--text-2)}
+.think b{color:var(--accent-deep);font-weight:600;margin-right:4px}
+.mode-prospect .honest,.mode-prospect .steal,.mode-prospect .back{display:none}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+
+.line{border-left:3px solid var(--accent);padding:7px 14px;background:var(--accent-tint-2);border-radius:0 var(--r-8) var(--r-8) 0;font-size:12px;font-weight:500;line-height:1.4}
+.line b{color:var(--accent-deep);font-weight:600;margin-right:6px}
+
+.sales{display:grid;gap:10px}
+.obj{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.obj div{border:1px dashed var(--border-2);border-radius:var(--r-8);padding:9px 10px;font-size:11px;color:var(--text-2)}
+.obj div b{display:block;color:var(--text);font-weight:600;margin-bottom:3px}
+.obj div b::before{content:"\201C"}
+.obj div b::after{content:"\201D"}
+.src{font-size:10px;color:var(--text-3);line-height:1.4}
+.src b{color:var(--text-2);font-weight:600}
+.foot{margin-top:auto;padding-top:10px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;font-size:10px;color:var(--text-3);line-height:1.35}
+.foot .tag{display:inline-block;padding:1px 6px;border-radius:4px;background:var(--amber-tint);color:var(--amber);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:9.5px;margin-right:6px}
+.est{display:inline-block;padding:0 5px;border-radius:4px;background:var(--amber-tint);color:var(--amber);font-size:10px;font-weight:600;letter-spacing:.03em;vertical-align:middle}
+.mode-prospect .back{display:none}
+.mode-prospect .est{display:none}
+
+@media (max-width:860px){.stack{padding:16px 0}.card{width:100%;border-radius:0;padding:24px 16px}.price,.cols,.strip,.obj{grid-template-columns:1fr}.tile .big{font-size:28px}}
+@media print{
+  @page{size:letter;margin:0.25in}
+  body{background:#fff}
+  .bar,.intro{display:none}
+  .stack{display:block;padding:0}
+  .card{width:auto;border:none;box-shadow:none;border-radius:0;padding:0;page-break-after:always;break-after:page;gap:10px;display:block}
+  .front{height:calc(11in - 0.5in);gap:9px}
+  .back{break-before:page;page-break-before:always;border-top:none;padding-top:0;height:calc(11in - 0.5in)}
+  .card:last-child{page-break-after:auto;break-after:auto}
+  .tile.us,.box.us,.strip div.us,.line,td.us,th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body class="mode-sales">
+<div class="bar">
+  <div class="t">Benable vs <span>seven one-pagers, two layouts · v2 draft · Sep 12 2026</span></div>
+  <span class="lbl">Layout</span><div class="seg" role="group" aria-label="Layout"><button type="button" data-layout="tony" aria-pressed="true">Tony’s three questions</button><button type="button" data-layout="sheet">Sales sheet</button></div>
+  <span class="lbl">Version</span><div class="seg" role="group" aria-label="Version"><button type="button" data-mode="sales" aria-pressed="true">Sales</button><button type="button" data-mode="prospect">Prospect</button></div>
+  <span class="lbl">Benable price</span><div class="seg" role="group" aria-label="Benable price"><button type="button" data-bp="preferred" aria-pressed="true">Preferred rate (Tony’s $50 at 100)</button><button type="button" data-bp="regular">Regular list</button></div>
+  <button type="button" class="btn" id="printbtn">Print all 7</button>
+  <a class="btn" href="../" style="text-decoration:none">Back to the study</a>
+  <nav class="nav" id="nav" aria-label="Cards"></nav>
+</div>
+
+<div class="intro">
+  <div class="panel">
+    <h2>Before this ships (Tony's Sep 18 target)</h2>
+    <p>Two layouts, toggle at the top. <b>Tony’s three questions</b> follows the structure of Tony's Sep 10 "Notes from the JoinBrands demo": what we learned, then the three questions (where are we better, how does the pricing compare, what should we steal), with pricing compared his way (their self-serve plus 30 minutes of brand time per creator at $50 an hour; their managed against our managed at 15 and at 100 a month). <b>Sales sheet</b> is the earlier one-page comparison (price tiles, the five-row table, why brands choose Benable, where they are strong and what to say, the line). Both fold in Maricarmen's Sep 11 "Competitive Set" (the Sep 10 JoinBrands demo, her Home From College account and test GIG, the soona check) and Tony's Sep 10 Sel:pH price ladder (25 / 50 / 100 creators at $1,599 / $2,699 / $4,999 preferred, $1,899 / $3,249 / $5,999 regular; three-month start, then cancel any time; "anyone who flakes is charged for the product and replaced"). Still open:</p>
+    <ol>
+      <li><b>Benable's delivered post rate.</b> Every card says "90%+" because Tony does. Pull last quarter's creators-live over contracted per brand from the portal so the number is ours.</li>
+      <li><b>Which ladder for 10 and 15 creators.</b> The Sep 8 email ($899 / $1,099 regular) and the Sep 10 email (25 and up) are stitched together here; the default toggle is the preferred rate because Tony’s own comparison uses $50 at 100. Tony confirms one list.</li>
+      <li><b>Demo week fills the estimates:</b> Billo Wed Sep 16 (posting and ad-permission prices; is it $99 or $120 now), Collabstr and Insense Thu Sep 17, Home From College Fri Sep 18; Social Cat emailed, Kale pending. Tony's add for every self-serve demo: do they offer a managed option, what does it cover, what does it cost.</li>
+      <li><b>The rights sentence</b> now uses Tony's Sep 10 wording: organic resharing included, ad rights secured creator by creator. JoinBrands bundles perpetual rights at every price, so the rep will hear it on every JoinBrands call; the card answers it head on.</li>
+      <li><b>Two claims are now sourced to Tony's notes:</b> the 40% usage-rights figure is his DM poll, and "the Collective" is an incentive program he names alongside the content guarantee and SMS. Both appear on the JoinBrands card as his, not as shipped product.</li>
+      <li><b>Tony's read on tone.</b> Each card names where the rival is genuinely strong and hands the rep the answer.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="stack" id="stack"></div>
+
+<script>
+const LOGO = "<svg class=\"logo\" width=\"105\" height=\"28\" role=\"img\" aria-label=\"Benable\" viewBox=\"0 0 180 48\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> <path d=\"M78.6982 22.0912C80.9037 21.2555 82.0188 19.5148 82.0188 17.2624C82.0188 13.2 78.9998 10.6459 74.1957 10.6459H64.9336V33.675H74.6828C79.4894 33.675 82.5058 31.0516 82.5058 27.0363C82.5058 24.6923 81.1583 22.8799 78.6982 22.0912ZM69.8292 14.9876H73.7061C75.7015 14.9876 77.002 15.9618 77.002 17.658C77.002 19.2602 75.7015 20.2813 73.7061 20.3036H69.8292V14.9876ZM74.1932 29.3357H69.8292V23.9505H74.1932C76.1885 23.9283 77.4891 25.0187 77.4891 26.6209C77.4891 28.3146 76.1885 29.3382 74.1932 29.3382V29.3357ZM175.48 27.3849C175.015 28.9624 173.67 29.892 171.883 29.892C169.329 29.892 167.798 27.9189 167.566 25.481H179.567C180.497 19.7225 176.944 15.4747 171.49 15.4747C166.035 15.4747 162.994 19.631 162.994 24.7368C162.994 29.8426 166.5 34.0236 171.863 34.0236C175.834 34.0459 179.199 31.9566 179.896 28.2206L175.485 27.3849H175.48ZM171.603 19.3071C173.529 19.3071 174.993 20.5385 175.109 22.4423H167.726C168.261 20.447 169.769 19.3071 171.603 19.3071ZM156.514 10.6483H161.248V33.6775H156.514V10.6459V10.6483ZM147.204 15.4772C145.323 15.4772 143.676 16.3352 142.561 17.7989V10.6483H137.826V33.6775H142.005L142.284 31.3335C143.399 33.0272 145.187 34.0508 147.207 34.0508C151.712 34.0508 154.961 30.3841 154.961 24.7418C154.961 19.0994 151.712 15.4797 147.207 15.4797L147.204 15.4772ZM146.3 29.7783C144.025 29.7783 142.539 27.8052 142.539 24.764C142.539 21.7228 143.956 19.772 146.3 19.772C148.643 19.772 150.176 21.6758 150.176 24.764C150.176 27.8522 148.574 29.7783 146.3 29.7783ZM127.333 15.4772C123.641 15.4772 120.902 17.7766 120.251 21.6288L124.568 22.1407C125.033 20.5385 126.054 19.4703 127.657 19.4703C129.422 19.4703 130.676 20.7016 130.676 22.6747V22.8379H128.122C123.525 22.8379 120.553 24.8332 120.553 28.7571C120.553 32.147 123.013 34.0731 126.124 34.0731C128.191 34.0731 129.978 33.0519 130.953 31.4967L131.232 33.7022H135.411V22.6747C135.433 18.4022 132.206 15.4772 127.333 15.4772ZM129.422 29.0118C128.888 29.5929 128.238 29.9415 127.496 30.0577C125.755 30.3124 124.756 29.3852 124.432 27.2712L130.723 26.3415C130.399 27.5258 129.956 28.4085 129.422 29.0118ZM92.5789 29.8945C90.0248 29.8945 88.4943 27.9214 88.2619 25.4835H100.264C101.193 19.725 97.6402 15.4772 92.1858 15.4772C86.7314 15.4772 83.6902 19.6335 83.6902 24.7393C83.6902 29.845 87.1962 34.0261 92.5591 34.0261C96.5053 34.0261 99.8482 31.9368 100.568 28.1983L96.1789 27.3849C95.7141 28.9624 94.369 29.892 92.5814 29.892L92.5789 29.8945ZM92.2995 19.3096C94.2256 19.3096 95.6894 20.5409 95.8056 22.4448H88.4226C88.9567 20.4494 90.4649 19.3096 92.2995 19.3096ZM118.439 22.0492V33.6799H113.704V23.0481C113.704 21.0058 112.451 19.7522 110.594 19.7522C108.551 19.7522 107.298 21.3544 107.298 23.5129V33.6799H102.563V15.8456H106.742L107.043 18.5159C108.017 16.5898 109.805 15.4747 111.988 15.4747C115.771 15.4747 118.419 18.0041 118.442 22.0442L118.439 22.0492Z\" fill=\"black\"/> <rect y=\"0.387329\" width=\"47.2277\" height=\"47.2253\" rx=\"9.54244\" fill=\"url(#pattern0_25901_4537)\"/> <path d=\"M29.1066 23.2077C28.9177 23.1905 28.8662 22.9329 29.0379 22.847C30.0167 22.3147 30.8067 21.5419 31.3734 20.5459C32.0775 19.3266 32.4381 17.9871 32.4381 16.5102C32.4381 15.1192 32.1118 13.8141 31.4421 12.5776C30.7724 11.3412 29.7763 10.3451 28.4197 9.55517C27.0802 8.76522 25.4316 8.37024 23.5082 8.37024H13.7196C13.0155 8.37024 12.4316 8.95412 12.4316 9.65821V38.1653C12.4316 38.8694 13.0155 39.4533 13.7196 39.4533H28.2308C32.5412 39.4533 36.2333 36.1561 36.5081 31.8457C36.8001 27.3807 33.417 23.6198 29.1066 23.2077Z\" fill=\"white\"/> <path d=\"M29.8954 32.9618C28.4872 33.6487 26.9244 33.9922 25.3789 33.9922C24.4 33.9922 23.4212 33.8548 22.4766 33.58C20.0381 32.8587 17.8915 31.193 16.552 28.9948C16.3631 28.6685 16.4489 28.2564 16.7752 28.0503C17.1015 27.8442 17.5137 27.9473 17.7026 28.2736C18.8531 30.1798 20.7422 31.6223 22.8544 32.2577C24.9667 32.8931 27.3194 32.687 29.3115 31.7253C29.6549 31.5536 30.0499 31.7081 30.2216 32.0516C30.3762 32.3779 30.2388 32.79 29.8954 32.9618Z\" fill=\"#9F96F7\"/> </svg>";
+const BEN_SHEET = {
+  regular:  { big:'$73', unit:'per creator, all in', sub:'15 creators a month for $1,099. Ladder: 10 for $899, 25 for $1,899, 50 for $3,249, 100 for $5,999 ($60 each). No creator fees, no platform fee, no per-campaign fee.', monthly:'$899 to $5,999 for 10 to 100 creators; monthly billing, three-month start, then cancel any time', twok:'25 creators, hand-picked and run for you, with about $100 left for product', at100:'$5,999 a month, $60 per creator, run for you' },
+  preferred:{ big:'$60', unit:'per creator, all in', sub:'15 creators a month for $899. Ladder: 10 for $699, 25 for $1,599, 50 for $2,699, 100 for $4,999 ($50 each). No creator fees, no platform fee, no per-campaign fee.', monthly:'$699 to $4,999 for 10 to 100 creators (preferred); monthly billing, three-month start, then cancel any time', twok:'25 creators, hand-picked and run for you, with about $400 left for product', at100:'$4,999 a month, $50 per creator, run for you' }
+};
+const BEN_TONY = {
+  preferred:{ p15:'$60', p100:'$50', m15:'$899', m100:'$4,999', ladder:'10 for $699, 15 for $899, 25 for $1,599, 50 for $2,699, 100 for $4,999 (preferred rate; three-month start, then cancel any time)' },
+  regular:  { p15:'$73', p100:'$60', m15:'$1,099', m100:'$5,999', ladder:'10 for $899, 15 for $1,099, 25 for $1,899, 50 for $3,249, 100 for $5,999 (regular list; three-month start, then cancel any time)' }
+};
+const US_LINE = 'Creators cherry-picked from a 1.3 million-creator community, each contracted to an in-feed post on Instagram or TikTok plus a Benable recommendation, credit card guarantee on file. Our team runs invites, briefing, chasing, receipts, review and post tracking; you approve every creator.';
+const WHY = [
+  '<b>One flat price.</b> No creator fees, no platform fee, no per-campaign fee. The only other cost is the product you gift, which you would ship on any platform.',
+  '<b>Hand-picked, and you approve.</b> Cherry-picked on verified Instagram and TikTok stats, location and store proximity, content quality and brand fit, with a note on why each one fits.',
+  '<b>Contracted content, not gifting and hoping.</b> Creators agree to the brief and keep a card on file: 90%+ post rates against about 50% for industry gifting. Anyone who flakes is charged for the product and replaced.',
+  '<b>We do the work, you keep the reach.</b> MD Solar Sciences went from 100+ hours a month to about 3. Every post goes to the creator’s own audience; organic resharing included.'
+];
+const CARDS_SHEET = [
+ { id:'joinbrands', name:'JoinBrands', them:'Self-serve marketplace: you post a job, set the price, pick applicants, reimburse or ship, chase, approve. "500K+" creators signed up, most with zero jobs done; the Sep 10 demo search found about ten Level 3 and ten Level 2. Managed tier: $4,000 a month on top, used by under 20 of 5,000 brands.',
+   big:'$58 to $115', unit:'per posted video, plus your time', sub:'$50 minimum ($58 with the 15% fee) up to the $100 default ($115). A prepaid 100-post blast is $25 ($29), no age or gender filters. The creator gives up another 20%.',
+   rows:[['Monthly price','$0 Free (15% fee), $99, $299 or $499 (8% fee); managed service $4,000 a month on top of creator costs'],['Creator fee','You set it: $50 minimum, $100 default, $25 on a 100-post blast; "$10 a video" blends $2 to $5 follow-on clips from a creator already hired'],['Platform fee','8% to 15% on top of every job, plus 20% taken from the creator'],['Who does the work','You, unless you pay the $4,000: brief, screen applicants, reimburse (95% of brands) or ship, chase, approve inside a 10-day window'],['$2,000 a month buys','17 posted videos at the default, 34 at the floor, 69 on a blast; every job run by you. At 100 a month their managed tier is $6,875 ($69 a post) against Benable at $4,999 ($50).']],
+   strong:['<b>Rights bundled at every price.</b> Perpetual rights and a one-year Spark code on every approved video, even at $25.<span class="ans">True. Organic resharing is included with us; for ads or your site we secure rights creator by creator.</span>','<b>No-show risk sits on the creator.</b> The creator fronts the purchase and is reimbursed after approval.<span class="ans">Same with us: a card on file, and anyone who flakes is charged for the product and replaced.</span>','<b>Volume at low unit prices.</b> Blasts to 100 posts at $25, retainers, TikTok Shop, five countries.<span class="ans">Blasts are prepaid, non-refundable, no age or gender filters. The rep claimed under 5% late; the live screen showed 51 of 140 jobs late.</span>'],
+   line:'JoinBrands is a job board: $50 to $100 a video plus 15%, your product, and you run every job, or $4,000 a month for their team. Benable at 100 creators is $50 to $60 each, all in, run for you.',
+   obj:[['JoinBrands is $25 a video.','That is a prepaid 100-post blast with no age or gender filters, or $2 to $5 follow-on clips from a creator you already hired. A normal job is $50 minimum, $100 default, plus 15% on top and 20% off the creator.'],['They include usage rights for free.','They do: perpetual rights and a one-year Spark code on every job. Organic resharing is included with us, and we secure ad rights creator by creator when you want a piece for paid. If ads are the whole goal, say so and we price it in.'],['They have 500,000 creators.','Signed up. Most have completed zero jobs; a live search found about ten Level 3 and ten Level 2. Their showcase, Goli, runs 1,300 creators at $41.50 a job for about 1,000 to 1,400 views a post, with 51 of 140 jobs late on screen. We send hand-picked profiles and replace anyone who flakes.']],
+   src:'JoinBrands pricing page and help center ("Campaign pricing defaults and minimums per type," Jun 2 2026; "Creator fees," Jul 1 2026), read Sep 9 2026; JoinBrands product demo with a rep, Sep 10 2026 (Tony, Julia, Maricarmen): creator levels, reimbursement share, managed tier price, Goli example, late-job screen. Trustpilot brand reviews Jul 2026.' },
+ { id:'socialcat', name:'Social Cat', them:'Self-serve marketplace for small brands. A subscription buys a monthly cap of "matches"; gifted is the default; you brief, contract, ship, chase and review. Social Cat "does not manage the collaboration process" and, in writing, does not refund when a creator ghosts.',
+   big:'$20', unit:'per match, before ghosts and your time', sub:'$199 a month over 10 of 15 matches. Brands on Trustpilot report 1 of 4 and 3 of 11 creators vanishing after the product ships; at a 70% delivery rate that is about $28 per delivered post, and you eat the lost product.',
+   rows:[['Monthly price','$99 for 5 matches, $199 for 15, $299 for 30; matches expire monthly'],['Creator fee','$0 on gifted collabs; creators set their own fee if paid, settled off-platform'],['Platform fee','None'],['Who does the work','You: invite up to 5,000 creators a month, negotiate, contract, ship, chase, review; status flips to "published" when the creator uploads, not when a post is verified; "Replace Matches" is a Pro perk with unconfirmed mechanics'],['$2,000 a month buys','30 matches (about 21 delivered at 70%) and $1,700 of product you ship yourself']],
+   strong:['<b>Cheapest entry in the market.</b> $99 a month and a 7-day trial.<span class="ans">$99 buys 5 matches you run yourself. Per delivered post, after no-shows and your hours, it is not $20. We are $73 with the work done and the post verified.</span>','<b>A big searchable pool.</b> "500K+" creators, audience data before you reach out, perpetual rights on every tier.<span class="ans">Searching is the easy part. Their own terms: "We do not guarantee that any Creator will deliver content on time, in the agreed quality, or at all."</span>','<b>Case studies at $18 a piece.</b><span class="ans">Those are 2023 prices, when $99 bought 25 matches. Today it buys 5; the per-match price rose 3 to 5x.</span>'],
+   line:'Social Cat sells you introductions for $13 to $20 each; what happens after the product ships is your problem. Benable sells you 15 creators who post, for $73 each, with someone chasing every one.',
+   obj:[['It is so much cheaper.','Per match, yes. Per delivered post it depends on how many disappear with your product; brands report 25% to 70%. Add your own hours and the gap closes fast. And nothing on Social Cat is verified live.'],['We can pick from thousands of creators.','You can. Then you invite, negotiate, contract, ship, and chase each one. We do that, and you still approve every creator.'],['They include usage rights.','So do we for organic resharing. If you plan to run ads, we set paid rights per creator, in writing.']],
+   src:'thesocialcat.com/pricing, terms (Jul 2026) and help center ("no reimbursement," "no refunds if creators fail to publish"), read Sep 9 2026. Trustpilot brand reviews May to Aug 2026.' },
+ { id:'homefromcollege', name:'Home From College', them:'Gen Z gig marketplace. You list a GIG, students apply, you pick, pay cash through the platform plus 20% on top. Strong on in-person work: retail creator visits, in-store demos by the hour, campus sampling. Students often have no audience.',
+   big:'$94', unit:'per posted video, plus your time', sub:'Their own guidance of $75 per video plus the 20% fee plus the Standard plan. $64 at the $50 street rate seen in live listings; $128 at $100. The brand also ships or reimburses the product.',
+   rows:[['Monthly price','$49 monthly (1 active student at a time) or $499 and $999 a year; $15K Premium; confirmed on our own paid account, Sep 10'],['Creator fee','You set it: guidance $75 to $100 per video, $800 a month, $30 an hour, confirmed in our own test GIG; microGIGs run about $20 flat for one TikTok tag'],['Platform fee','20% added to your invoice (10% on Premium)'],['Who does the work','You: list, screen applicants, contract, brief, ship or reimburse, chase, approve; no replacement if a student drops'],['$2,000 a month buys','16 to 32 videos you run yourself, or two monthly ambassadors']],
+   strong:['<b>The physical world at scale.</b> In-store visits at Target, Ulta, Whole Foods; demos by the hour; multi-campus programs.<span class="ans">In-store visits are built into Benable campaigns: creators go into Target or Walmart, pick up the product, film on location, and submit the receipt with the post. We manage the receipts.</span>','<b>Cash-paid, contracted, full IP.</b> A signed contractor agreement assigns all rights including paid media.<span class="ans">Good for a UGC file. For reach, a student with no following posting to no one is a file, not a post.</span>','<b>$49 to start.</b><span class="ans">$49 allows one active student at a time. At their own rates it is $94 to $128 a video before your hours.</span>'],
+   line:'Home From College is a job board for students: $94 a video at their own rates, cash plus product, and you run it. Benable is $73 per creator with an audience, in-store visits included, run for you.',
+   obj:[['They do in-person retail visits.','So do we: creators go into Target or Walmart, buy the product, film on location and submit the receipt with the post; we verify both. Ask them how many of their students have followers.'],['Students are cheaper.','$50 to $100 cash each, plus 20%, plus product, plus your time finding and chasing them. And most have no audience.'],['We get full ownership of the content.','Ask whether you plan to run it as ads. If yes, we set paid rights per creator in writing; if no, our organic reshare covers it.']],
+   src:'homefromcollege.com/company/pricing, brand and student FAQs, terms, the form contractor agreement, 20 live GIG listings, read Sep 9 2026; our own paid account and test GIG, Sep 10 2026 (Maricarmen); demo booked Sep 18.' },
+ { id:'insense', name:'Insense', them:'Self-serve marketplace with a paid trial. You write a brief with a price range, creators bid inside it, escrow releases on approval. Perpetual paid-use rights on every paid job. Insense’s own manager to run it is "from $2,500 a month" before any creator payment.',
+   big:'$188', unit:'per posted video, plus your time', sub:'Insense’s own floor of $125 for a nano posted video, plus the 10% fee, plus the $500-a-month Brand plan. At a typical $175 bid it is $243. Content-only files at their $100 floor: $160.',
+   rows:[['Monthly price','$650 trial month, then $500 a month billed quarterly ($1,500) or $400 annual; auto-renews'],['Creator fee','You set a range; floors $100 per content file, $125 per nano post; typical $150 to $250'],['Platform fee','20% on the trial, 10% on Brand, 7% on Agency, on top of every creator payment'],['Who does the work','You: screen 20 to 40 applications per brief, negotiate, ship, chase, three revision rounds'],['$2,000 a month buys','7 to 9 posted videos on the Brand plan, run by you']],
+   strong:['<b>Rights and ads built in.</b> Perpetual paid-use rights on every paid job; partnership ads and Spark codes with 7 to 365-day authorizations.<span class="ans">Ask what they will actually run as ads. We set paid rights per creator when needed; most brands want the organic posts first.</span>','<b>Big pool, content-only jobs.</b> "115,000+" creators in 57 countries; files without posting.<span class="ans">Their own trade-off: you screen 20 to 40 applicants per brief. We send 10 to 25 that fit and you approve.</span>','<b>Escrow creators trust.</b> Payment frozen at hire, released on approval; creator app rated 4.6.<span class="ans">Brand-side Trustpilot is 3.6, with one in four reviews one-star, almost all a $1,500 quarterly renewal with the refund denied.</span>'],
+   line:'Insense is a toolbox: $500 a month, 10% on top, and $125 or more per creator before you have posted anything, with you doing the screening. Benable is $73 per creator, all in, screened and run for you.',
+   obj:[['Insense includes lifetime rights.','For paid jobs, yes. If you will run ads, we set 90-day paid rights per creator in writing. If you want organic posts from real followers, that is our whole product.'],['They have 115,000 creators.','And you read 20 to 40 applications per brief to find 3 to 5 worth briefing. We hand-pick, you approve.'],['The trial is only $650.','The trial auto-upgrades to $1,500 a quarter unless you cancel 48 hours before, and subscriptions are "not subject to return." Our packages are one monthly price.']],
+   src:'insense.pro/pricing, managed-service pricing, terms (May 29 2026), refund policy, help center, read Sep 9 2026. Trustpilot brand reviews Mar to Sep 2026.' },
+ { id:'kale', name:'Kale', them:'"Reward customers, not influencers." A brand funds a reward pool; Kale’s algorithm pays customers who already own the product $10 to $25 per post based on views. No product is shipped, no creator is chosen, no count is promised. Brand pricing is not public.',
+   big:'$45 to $200', unit:'per video, derived from Kale’s own case studies', sub:'Kale publishes cost per engagement ($0.30 to $0.73); at its published engagement counts that is about $44 a video for Herbal Essences and $80 to $200 for CAVA and Breyers launches. No product cost for the brand.',
+   rows:[['Monthly price','Not public; demo only; minimum budget unknown'],['Creator fee','$10 to $25 per post to the customer, set by Kale’s algorithm; no product, no reimbursement'],['Platform fee','Unknown'],['Who does the work','Kale’s algorithm; you set "challenges," you do not pick creators or brief them'],['$2,000 a month buys','10 to 45 videos if Kale accepts a brand that size; unknown']],
+   strong:['<b>No gifting at all.</b> Customers already own the product; the brand pays only for posts that perform.<span class="ans">That works when thousands of people already buy you. For a brand building awareness, there is no one to reward.</span>','<b>Volume from real visits.</b> Sweetgreen got 238 videos in 7 days; Crumbl 650 in 5.<span class="ans">Those are chains with millions of customers. Ask how many of yours would post this month.</span>','<b>Receipts as proof.</b> Purchases verified by receipt or linked card.<span class="ans">We use it too: on in-store campaigns creators submit the receipt with the post, and both are verified.</span>'],
+   line:'Kale rewards your existing customers for posting; it cannot promise a count, pick a creator, or brief anyone. Benable puts your product in 15 chosen hands and gets 15 posts.',
+   obj:[['Kale does not need product.','Kale needs customers. If you have thousands who already buy and post, use both. If you are trying to reach new people, Kale has no one to reward yet.'],['It is cheaper per video.','At scale, for a national chain, probably. Kale does not publish brand pricing and the derived cost is $45 to $200; and the videos come from whoever shows up.'],['The content is more authentic.','It is from customers, unbriefed. Ours is from real creators, on your brief, approved by you, and it is not a coin flip whether it happens.']],
+   src:'getkale.com brand pages, help center, tournament rules and case studies (Herbal Essences, CAVA, Sweetgreen, Crumbl), read Sep 9 2026. Creator pay from App Store reviews. Per-video cost is derived, not published.' },
+ { id:'collabstr', name:'Collabstr', them:'Pay-per-order marketplace. Creators list fixed-price packages; you pay the listed price plus a hiring fee into escrow, with a full refund if nothing is delivered. Collabstr is "not an agency": you find, brief, ship and chase.',
+   big:'$205', unit:'per posted video, plus your time', sub:'Collabstr’s own 2026 average of $186 actually paid for a posted TikTok, plus the 10% hiring fee. Instagram $193, a content-only file $154. Usage rights add about 40%. A $50 creator exists, if you find and run them.',
+   rows:[['Monthly price','$0 to hire directly; $249 to $333 a month (annual) to post a campaign; Enterprise from $1,000'],['Creator fee','Creator sets it; $50 minimum on campaigns even with free product'],['Platform fee','10% added for you (5% on Premium), plus 15% taken from the creator'],['Who does the work','You: search 1.2 million listings, brief, ship, chase, review inside a 72-hour window'],['$2,000 a month buys','About 9 posted TikToks at the average, or 30 from $50 creators you manage yourself']],
+   strong:['<b>Zero commitment, escrow refund.</b> "We do not charge you until an influencer accepts your order"; full refund if nothing is delivered.<span class="ans">A refund gives you your money back; it does not give you the month back. We deliver the posts.</span>','<b>Choice and transparency.</b> 1.2 million listed creators with public prices, big accounts, YouTube and Twitch too.<span class="ans">At the marketplace average a posted TikTok is $205 before product. Our $73 buys the same tier of creator with the work done.</span>','<b>Published benchmarks brands trust.</b><span class="ans">Use them: Collabstr’s own report says the average collaboration costs $154 to $193. Quote it next to $73.</span>'],
+   line:'Collabstr at its own average is $205 per posted TikTok plus 10%, and you run the order. Benable is $73 per creator, run for you, with posts verified.',
+   obj:[['I can find $50 creators on Collabstr.','You can, under 10k followers, and then brief, ship, chase and review each one inside a 72-hour clock, one campaign post a month on the $249 plan. We are $73 with that done.'],['Escrow means no risk.','Escrow refunds the fee, credited to your Collabstr balance. The product you shipped and the month you planned are gone. If a Benable creator drops, we add a slot next campaign.'],['They have bigger creators.','They do, at $300 to $1,000 a post. Our model is 10 to 25 micro creators posting every month, which is what moves a small brand.']],
+   src:'collabstr.com/pricing, terms, FAQ, 2025 and 2026 Influencer Marketing Reports (21,000 collaborations), knowledge base, read Sep 9 2026.' },
+ { id:'billo', name:'Billo', them:'Pay-per-video content shop. You post a brief, non-influencer creators apply, you pick, ship, and buy finished 15 to 120 second videos from a prepaid balance. Nothing is posted unless you buy a creator-priced 30-day add-on. Billo took its pricing page behind a login in 2026.',
+   big:'$99', unit:'per file, nothing posted', sub:'The 2026 entry price for a 15-second video from a regular creator, who receives $30 of it; several 2026 listings now cite $110 to $120, to be confirmed on the Sep 16 demo. Posting to the creator’s account is a creator-set add-on, plausibly $149 to $249 all in <span class="est">estimate</span>. Prepaid balances expire in 12 months.',
+   rows:[['Monthly price','None; prepaid packs from $500 to $30,000; optional CreativeOps subscription $500 a month; managed "starting at $2,000 / month"'],['Creator fee','Inside the $99: $30 to a new creator, $70 to a premium one, for a 15-second video'],['Platform fee','Inside the price; 25% on extras like raw footage'],['Who does the work','You: pick from applicants, ship within 2 days, request edits inside a 3-business-day auto-approval window'],['$2,000 a month buys','About 20 files, none posted; or the entry to their managed tier']],
+   strong:['<b>Ad-ready files with full rights.</b> Perpetual IP assignment at $0 extra, 2 reshoots plus 2 edits, expert editing for $89.<span class="ans">If the job is ad creative, Billo is a fair buy. If the job is people posting about you, a Billo creator has "no social media presence required."</span>','<b>Fast and no subscription.</b> Days, not a monthly cohort; $99 to try.<span class="ans">Balances expire in 12 months and a 25% fee applies to refunds after 30 days; the loudest brand complaints in 2026 are expiring credits and markup.</span>','<b>Scale and proof.</b> "22,000+ brands," a creative-analytics layer.<span class="ans">Different product. Ask what a posted Billo video costs; nobody outside a login can quote it.</span>'],
+   line:'Billo sells a $99 file from someone with no audience, and nobody posts it. Benable is $73 per creator posting to their own followers and recommending you on Benable, run for you.',
+   obj:[['Billo is $99 a video.','For a file. A posted video is a creator-set add-on Billo does not publish; estimates run $149 to $249. Our $73 is a post to a real audience, all in.'],['We own the content outright.','For ad files, that matters, and Billo is good at it. For organic reach, ownership of a video nobody saw is not the goal.'],['No subscription, we just buy what we need.','Billo balances are prepaid and expire in 12 months, with a 25% fee on refunds after 30 days. Our monthly price is the whole price.']],
+   src:'billo.app help center (refund policy Feb 2026, organic posting and partnership ads, unlock raw footage Apr 2026), terms (Jun 1 2026), blog Sep 4 2026 (creator payouts), read Sep 9 2026; $99 entry price from four 2026 listings since the pricing page now redirects to login.' }
+];
+
+const CARDS_TONY = [
+ { id:'joinbrands', name:'JoinBrands', tag:'Self-serve marketplace; managed tier at $4,000 a month',
+   learned:[
+    '<b>Upwork for UGC.</b> A brand posts a campaign like a job listing, 200 to 300 creators apply in the first days, the brand vets (portfolio, linked socials, brand reviews), hires with a click, is charged on acceptance, approves or sends back. "500K+" creators signed up; a live search found barely ten Level 3s and ten Level 2s, everyone else Level 1, most with zero completed jobs.',
+    '<b>Timing.</b> Nick quoted 10 to 14 days end to end; the creator’s 10-day clock only starts when the product arrives, and on his own live campaign 51 of 140 jobs on one page were late (call it 30 to 40%) against a claimed "under 5%."',
+    '<b>Two ways to pay.</b> Content + Posting, pay-as-you-go: $50 minimum per video, no cap, $100 platform default. Social Blasts, prepaid: commit to 100 posts at $25 each. 15% platform fee on top unless on a $99 to $499 plan (12% to 8%); the creator gives up another 20%.',
+    '<b>Reimbursement instead of shipping.</b> 95% of brands: the creator buys through your link, uploads the receipt, is reimbursed after approval; money sits in escrow. Cancel a late or silent creator and you get the fee and the reimbursement back.',
+    '<b>Managed service.</b> $4,000 a month on top of creator costs: their team launches, briefs, hires, chases, reviews; you approve. Under 20 of their 5,000 brands use it.',
+    '<b>Live example, Goli Supplements.</b> About 1,300 creators done, 1,500 pending, sent into Target to buy and film. $41.50 per job all in (fee, product, fees), 1.8 million impressions, about 1,000 to 1,400 views a post, an estimated $120,000+ a month.',
+    '<b>What their customers complain about,</b> per Nick: creators not delivering on time and not following the brief. "You basically have to message every single one of them."'
+   ],
+   better:[
+    '<b>Management is included.</b> Their self-serve product is a marketplace: you find, filter, brief, hire, chase and review. Their managed version is $4,000 a month on top. Ours is the managed version by default.',
+    '<b>Creator quality and content on brief.</b> We stay close to the content, review it, and keep briefs clean; the creators we attract are higher quality. Sizable skincare and beauty brands will not go for a $25 swarm. Slightly higher quality, at scale, is the angle.',
+    '<b>On-time posting.</b> A credit card guarantee on file, and anyone who flakes is charged for the product and replaced. Chasing creators is their customers’ number one complaint.'
+   ],
+   honest:['Scale: 500,000 creators who want collabs to our roughly 50,000; 5,000 brands running collabs monthly to our tens; five years of polish to our five months.','Usage rights fully bundled at cost on every job, including the $25 ones. We ask brands to pay $50 to $100 extra per creator for paid rights.'],
+   price:{ self15:'$83 to $140', self100:'$54', man15:'$324', man100:'$69', selfNote:'$50 floor or $100 default plus 15%, plus 30 minutes of your time per creator at $50 an hour (five applications screened per hire, late posters chased). At 100 a month on a $25 blast: $28.75 plus $25 of time.', manNote:'$4,000 a month plus creator costs: $6,875 at 100 creators, about $69 a post; ours is $4,999, almost 30% cheaper.', how:'<b>How they quote $10 a video.</b> Once a creator has done the $25 video and has your product, you can offer $2 to $5 for a follow-on story or clip. Five of those averaged with the $25 looks like $10 to $13. The sticker minimum is $50, or $25 on a prepaid 100-post package.' },
+   steal:['<b>Reimbursement for creators who ghost.</b> The creator fronts the product and is paid only when the video is in, so a no-show costs the brand time, not product. Our card-on-file guarantee is our version; we may have to move to reimbursement if that is what it takes.','<b>Usage rights captured up front.</b> In onboarding and terms, with the Spark code collected at upload. Tony’s DM poll: about 40% of our creators would say yes with no friction; we are not asking.','<b>Extra pieces per creator at a lower price.</b> A creator who already has the product does a second video for a fraction of the price; it brings the per-post number down.'],
+   think:'Ten brands like Goli and we are over the early $1M ARR goal. Go heavier on brands with a signal that they already spend on creators: creators tagging a brand, a #JoinBrands hashtag, their competitor lists.',
+   obj:[['JoinBrands is $25 a video.','That is a prepaid 100-post blast with no age or gender filters, or $2 to $5 follow-on clips from a creator you already hired. A normal job is $50 minimum, $100 default, plus 15% on top and 20% off the creator.'],['They include usage rights for free.','They do: perpetual rights and a one-year Spark code on every job. Organic resharing is included with us, and we secure ad rights creator by creator when you want a piece for paid. If ads are the whole goal, say so and we price it in.'],['They have 500,000 creators.','Signed up. Most have completed zero jobs; a live search found about ten Level 3 and ten Level 2. Their showcase runs at about 1,000 to 1,400 views a post with a third of jobs late on screen. We send hand-picked profiles and replace anyone who flakes.']],
+   src:'JoinBrands product demo with Nick, Sep 10 2026 (Tony, Julia, Maricarmen), and Tony’s notes of the same day; joinbrands.com pricing and help center read Sep 9 2026; Trustpilot brand reviews Jul 2026.' },
+
+ { id:'socialcat', name:'Social Cat', tag:'Self-serve marketplace, gifted by default',
+   learned:[
+    '<b>A subscription buys matches.</b> $99 a month for 5 creators, $199 for 15, $299 for 30; matches expire monthly. Creators apply to your campaign or you invite from a search of "500K+" (1,000 to 5,000 invitations a month by plan).',
+    '<b>Gifted is the default.</b> "Gifted: you receive product for free (including shipping)." Paid collabs exist: the creator sets a fee (€25 to €500) and you pay them off-platform by PayPal or Venmo; no platform fee. "$150K+ paid to creators" across 100,000+ creators says almost everything is gifted.',
+    '<b>You run it.</b> Brief, negotiate, contract (a built-in form), ship, chase, review. Social Cat "does not manage the collaboration process directly." Status flips to "Content Published" when the creator uploads, not when a post is verified live.',
+    '<b>No-shows are yours.</b> "Social Cat does not offer reimbursement for the product, cash compensation, or discounts if a creator fails to deliver." Terms: "We do not guarantee that any Creator will deliver content on time, in the agreed quality, or at all." A "Replace Matches" perk exists on Pro; mechanics unconfirmed.',
+    '<b>Managed services</b> exist off the pricing page: "most brands invest between $3,000 and $15,000 per month total," influencer fees billed separately, one-month trial then three-month packages.',
+    '<b>What their customers complain about</b> (Trustpilot, 2026): "sent product to 4 creators, only 1 actually produced work"; "3 stopped responding the moment they received our product, that’s $300 loss + $100 membership"; "the platform is a ghost town."'
+   ],
+   better:[
+    '<b>Everything after the product ships.</b> Sourcing, chasing, verification of the live post, and not losing product to ghosts. Our card-on-file guarantee is the stick Social Cat says in writing it does not have.',
+    '<b>Creators with an audience, hand-picked.</b> Social Cat’s pool starts at 3,000 followers and you pick from applicants; we cherry-pick on verified stats, fit and location and you approve.',
+    '<b>A number you can plan on.</b> 15 creators means 15 posts. A Social Cat match is an introduction; brands report 25% to 70% never post.'
+   ],
+   honest:['Price: $10 to $20 of subscription per match against our $60 to $73 per creator; even at 50% delivery their subscription cost per delivered post is under ours.','Entry: $99 a month and a 7-day trial for a founder with $500 a month.','Perpetual, ad-inclusive usage rights on every tier, in writing.'],
+   price:{ self15:'$38 per match', self100:'caps at 30', man15:'not public', man100:'not public', selfNote:'$199 over 15 matches is $13, plus 30 minutes of your time per creator at $50 an hour. Per delivered post at the 70% delivery brands report: about $54, plus the product that walked away with the other 30%. Pro caps at 30 matches; 100 a month means several accounts or their managed tier.', manNote:'Managed services "between $3,000 and $15,000 per month total," creator fees on top; no per-post price published.', how:'<b>How they get to "$18 a piece."</b> Their case studies date from 2023 pricing, when $99 bought 25 matches. Today it buys 5; the per-match price rose 3 to 5 times.' },
+   steal:['<b>Inbound applications with audience data up front.</b> Creators apply to a brief and the brand sees demographics before saying yes; the cold-start problem becomes a feature.','<b>Licensing on every tier, stated everywhere.</b> "You own every piece of UGC" removes an anxiety for small brands at no cost to Social Cat.','<b>Cost-per-asset proof in case studies.</b> "$18 per content piece" sells to founders; we should publish our per-post number the same way.'],
+   think:'Social Cat is where a $500-a-month founder starts and churns when the ghosts pile up. Those brands are a list: they already believe in gifting and already lost product to it.',
+   obj:[['It is so much cheaper.','Per match, yes. Per delivered post it depends on how many disappear with your product; brands report 25% to 70%. Add your own hours and the gap closes fast. And nothing on Social Cat is verified live.'],['We can pick from thousands of creators.','You can. Then you invite, negotiate, contract, ship, and chase each one. We do that, and you still approve every creator.'],['They include usage rights.','So do we for organic resharing. If you plan to run ads, we set paid rights per creator, in writing.']],
+   src:'thesocialcat.com/pricing, terms (Jul 2026) and help center, read Sep 9 2026; Maricarmen’s Sep 1 hands-on pass (onboarding, trial cap, contract builder); Trustpilot brand reviews May to Aug 2026. Demo requested by email, no booking link.' },
+
+ { id:'homefromcollege', name:'Home From College', tag:'Gen Z gig marketplace, self-serve; in-person work is core',
+   learned:[
+    '<b>A brand lists a GIG, students apply.</b> The brand picks, contracts (a form agreement assigning all IP, name, likeness and social handles, incl. paid media), pays cash through the platform plus 20% on top. Students receive 100% of the listed pay. Confirmed on our own paid account and test GIG, Sep 10.',
+    '<b>Pricing.</b> Starter $49 a month (one active student at a time), Standard $499 a year (10 active), Scale $999 a year (50 active), Premium from $15K a year at 10% fee. H\\FC’s own guidance: $75 to $100 per video, $250 to $400 one-time, $800 a month, $30 an hour. Live listings run $30 to $150 per retail video; microGIGs about $20 flat for one TikTok tag.',
+    '<b>In-person is a mature category.</b> An "IRL" filter; retail creator visits at Target, Walmart, Ulta, Whole Foods ($30 to $150 plus reimbursed product); demo shifts at $18 to $30 an hour; sampling and gameday days at $100 to $250. Vita Coco ran 50 ambassadors across 23 campuses.',
+    '<b>Product.</b> Usually the student buys it and files a reimbursement request; some listings make the student buy unreimbursed; the brand ships in others.',
+    '<b>No guarantee.</b> Pay only on completed tasks, the brand can pro-rate; fees "final and non-refundable"; a $2,500 penalty per worker paid off-platform, reinforced by a compliance banner in every GIG chat.',
+    '<b>Who the students are.</b> 18 to 27, "750K+ students and graduates," no enrollment required, no follower requirement. Fine for a UGC file; weak for reach.'
+   ],
+   better:[
+    '<b>Fully managed, and in-store visits built in.</b> Creators go into Target or Walmart, pick up the product, film on location and submit the receipt with the post; we manage the receipts. H\\FC is DIY at every tier below $15K a year.',
+    '<b>Creators with an audience.</b> A student with no following posting to no one is a file, not a post.',
+    '<b>A guaranteed count.</b> Starter allows one active student at a time; there is no replacement when one drops.'
+   ],
+   honest:['The physical world at scale: multi-campus programs, demo shifts by the hour, sampling and gameday work we do not do.','Cash-paid deliverables under a signed contractor agreement with full IP including paid media.','A $49 floor for a brand that needs one or two posts.'],
+   price:{ self15:'$118', self100:'$120', man15:'none', man100:'none', selfNote:'Their $75 guidance plus 20% plus the Standard plan, plus 30 minutes of your time per student at $50 an hour. At the $50 street rate: $88. At 100 a month you need Premium ($15K a year, 10% fee): about $120 at $75, $92 at $50.', manNote:'Premium adds "recruitment assistance" and strategy sessions, not a run-it-for-you service.', how:'<b>How they get to "$49."</b> $49 buys platform access for one active student at a time. Every video is cash on top, plus 20%, plus product.' },
+   steal:['<b>The IRL taxonomy.</b> Retail creator visit, in-store demo, sampling, event day, each a GIG type with its own pay norm. Our Retail Visit belongs in the campaign-type picker the same way.','<b>Receipt-as-deliverable.</b> Buy at a named retailer, upload the receipt, get reimbursed; that is a sell-through unit the brand can show its buyer.','<b>Rights in the contract, not the brief.</b> One signed form, IP assigned incl. paid media, before the work starts.'],
+   think:'H\\FC’s retail-visit brands (Legendary Foods at Target, Brody’s at Whole Foods, wearIQ) are exactly the Sel:pH use case Tony just priced at 50 to 100 creators a month. Their GIG pages are a prospect list.',
+   obj:[['They do in-person retail visits.','So do we: creators go into Target or Walmart, buy the product, film on location and submit the receipt with the post; we verify both. Ask them how many of their students have followers.'],['Students are cheaper.','$50 to $100 cash each, plus 20%, plus product, plus your time finding and chasing them. And most have no audience.'],['We get full ownership of the content.','Ask whether you plan to run it as ads. If yes, we set paid rights per creator in writing; if no, our organic reshare covers it.']],
+   src:'homefromcollege.com pricing, FAQs, terms, the form contractor agreement, 20 live GIG listings, read Sep 9 2026; our own paid account and test GIG, Sep 10 2026 (Maricarmen); demo booked Fri Sep 18.' },
+
+ { id:'insense', name:'Insense', tag:'Self-serve marketplace with a paid trial; manager for $2,500 a month',
+   learned:[
+    '<b>Brief with a price range, creators bid inside it.</b> Campaign moderated by Insense within 24 hours, applications "within 48 hours," escrow released on approval, up to three revisions. Deliverable types: content-only UGC, posted content, Creator Ads (Partnership and Spark), product seeding.',
+    '<b>Pricing.</b> Trial "from $650/mo" for one month, then auto-upgrades to Brand at "$1,500 billed quarterly" ($500 a month, $400 annual); Agency $800. Marketplace fee on top of every creator payment: 20% trial, 10% Brand, 7% Agency. Subscriptions "not subject to return."',
+    '<b>Creator pay.</b> Their own floors: "UGC campaigns start at $100 per video," "sponsored posts beginning at $125 for nano-influencers," "$1,000 is recommended" for 5 creators. Creators report being paid as low as $30. The actual rate cards are images; Maricarmen transcribes them on the Sep 17 demo.',
+    '<b>You do the screening.</b> Brands read 20 to 40 applications per brief to find 3 to 5 worth briefing. The "Dedicated Platform Manager" who does it for you is "from $2,500/month" before any creator payment.',
+    '<b>Product seeding</b> is gifted-only on the subscription, and posting is optional there: "no obligation to follow strict briefs."',
+    '<b>What their customers complain about</b> (Trustpilot 3.6, 25% one-star): the $1,500 quarterly renewal with the refund denied, "creators misrepresenting their languages and their followers," "$1,500 is very expensive for that kind of service."'
+   ],
+   better:[
+    '<b>Loaded cost per posted video.</b> Insense runs 2x to 4x across every scenario once the subscription, the fee and the creator cash are counted.',
+    '<b>No creator cash, no wallet float.</b> On Insense you fund a wallet before every hire and commit $1,500 a quarter.',
+    '<b>Screening and chasing are inside the price.</b> Insense sells that for $2,500 a month on top.'
+   ],
+   honest:['Rights: perpetual, worldwide, paid use and CTV on every paid job, with raw footage as an option.','Ad plumbing: Partnership Ads and Spark codes with 7 to 365-day authorizations, Meta and TikTok partner badges.','Scale and choice: "115,000+" creators, 57 countries, content-only jobs, TikTok Shop and affiliate campaign types.'],
+   price:{ self15:'$196 to $251', self100:'$168', man15:'$337', man100:'$168', selfNote:'Insense’s $125 nano floor plus 10% plus the $500 plan over 15, plus 30 minutes of your time per creator at $50 an hour. At a typical $175 bid: $251. At 100 a month the plan amortizes away: about $168.', manNote:'The $2,500 platform manager plus the Brand plan plus creators at the floor: $5,062 for 15 ($337 each), $16,750 for 100 ($168 each). Ours: $899 and $4,999.', how:'<b>How they get to "$100 a video."</b> That is the content-only floor with nothing posted, before the 10% fee and the $500 a month.' },
+   steal:['<b>Rights transfer tied to payment.</b> "Rights transfer once the content is approved and the creator is compensated": one event, no negotiation.','<b>Ad authorizations with a term.</b> Spark codes for 7, 30, 60 or 365 days, chosen in the brief, priced by length.','<b>A written brief that is the contract.</b> "The brief serves as a legal contract between the brand and the creator."'],
+   think:'Insense’s April 2026 pricing guide tells its own readers that managed services run $3,000 to $15,000 a month. Quote that back when a prospect asks why we cost more than a marketplace.',
+   obj:[['Insense includes lifetime rights.','For paid jobs, yes. If you will run ads, we set 90-day paid rights per creator in writing. If you want organic posts from real followers, that is our whole product.'],['They have 115,000 creators.','And you read 20 to 40 applications per brief to find 3 to 5 worth briefing. We hand-pick, you approve.'],['The trial is only $650.','The trial auto-upgrades to $1,500 a quarter unless you cancel 48 hours before, and subscriptions are "not subject to return." Our packages are one monthly price.']],
+   src:'insense.pro pricing, managed-service pricing, terms (May 29 2026), refund policy, help center, read Sep 9 2026; Trustpilot brand reviews Mar to Sep 2026. Demo Thu Sep 17.' },
+
+ { id:'kale', name:'Kale', tag:'Pays customers, not influencers; demo-gated',
+   learned:[
+    '<b>"Reward customers, not influencers."</b> A brand funds a reward pool and turns priorities into "challenges" (new product, retail launch, trend) with requirements: say the brand name, show the product, sometimes proof of purchase. Kale’s algorithm pays customers who already own the product per post, by views and quality.',
+    '<b>Pricing is not public.</b> Sales-led "Request a demo"; "Not self-serve for brands." The only brand-side figures Kale publishes are cost per engagement: "$0.10 to $1 versus $2.50"; Herbal Essences $0.30, Notion $0.60, Anthropologie $0.68 to $0.73.',
+    '<b>What customers earn.</b> $10 to $25 a post is typical ($24 on 721 views, $45 on 15K); viral outliers $187 to $250; no free product, no reimbursement ("post about products you already have"), a 3% cash-out fee capped at $3.',
+    '<b>In-person is organic.</b> The customer’s own visit is the content: Sweetgreen 238 videos in 7 days, Crumbl 650 in 5, CAVA purchase-required, Chili’s, Planet Fitness. Purchases verified by receipt or a Plaid-linked card in "tournaments."',
+    '<b>No count promised.</b> Volume depends on how many customers a brand already has; spots cap each challenge, and CAVA had 200+ waitlisted for 70 videos.'
+   ],
+   better:[
+    '<b>Guaranteed, brand-approved volume from chosen creators with a brief.</b> Kale cannot promise a count, pick a creator, or brief anyone.',
+    '<b>Works before you have thousands of customers.</b> For a brand building awareness there is no one on Kale to reward yet.',
+    '<b>In-store visits with a receipt, from creators with an audience.</b> Same proof mechanic, aimed rather than incidental.'
+   ],
+   honest:['Cheaper at scale for a national chain, with zero product or shipping cost; the customer pays retail for the product.','Volume from real visits in days: hundreds of videos in a week for brands with millions of customers.','Receipt and card verification is a cleaner proof than anything we run today.'],
+   price:{ self15:'n/a', self100:'$45 to $200', man15:'n/a', man100:'not public', selfNote:'Kale has no self-serve tier and no per-post sticker. Derived from its own cases: about $44 a video for Herbal Essences (410K engagements at $0.30 over 2,800 videos), $80 to $200 for CAVA and Breyers launches. No product cost to the brand, no brand labor beyond writing the challenge.', manNote:'Kale is the managed layer; whether it charges a fee on top of the reward pool, and its minimum budget, are unknown until the demo.', how:'<b>How they get to "$0.30 per engagement."</b> Cost per engagement on a viral customer video is low by construction; per video it is $45 to $200, and only for brands whose customers already post.' },
+   steal:['<b>Receipt-as-proof and linked-card verification.</b> The mechanic our Retail Visit type should borrow.','<b>The requirements checklist.</b> Say the brand name, show the product, time limit, proof of purchase: a brief compressed into four checkboxes.','<b>Challenges with capped spots.</b> Scarcity creates a waitlist; a waitlist is demand data.'],
+   think:'Kale’s roster (Olipop, The Ordinary, Vita Coco, Herbal Essences) are brands with distribution and customers. They are not our beachhead, but they are the brands that will ask "why gift at all?"',
+   obj:[['Kale does not need product.','Kale needs customers. If you have thousands who already buy and post, use both. If you are trying to reach new people, Kale has no one to reward yet.'],['It is cheaper per video.','At scale, for a national chain, probably. Kale does not publish brand pricing and the derived cost is $45 to $200; and the videos come from whoever shows up.'],['The content is more authentic.','It is from customers, unbriefed. Ours is from real creators, on your brief, approved by you, and it is not a coin flip whether it happens.']],
+   src:'getkale.com brand pages, help center, tournament rules and case studies (Herbal Essences, CAVA, Sweetgreen, Crumbl), read Sep 9 2026; creator pay from App Store reviews. Demo pending Kale’s review of our company.' },
+
+ { id:'collabstr', name:'Collabstr', tag:'Pay-per-order marketplace; "not an agency"',
+   learned:[
+    '<b>Creators list fixed-price packages.</b> You search 1.2 million listings (or post a campaign on the $249 to $333 a month Pro and Premium plans, one campaign a month on Pro), add to cart or send a custom offer, pay the listed price plus a 10% hiring fee into escrow (5% on Premium), and are charged only when the creator accepts within 72 hours. The creator pays a separate 15% on payout.',
+    '<b>What creators actually charge.</b> Collabstr’s 2026 report on 21,000 collaborations: UGC $154, TikTok $186, Instagram $193, YouTube $255 actually paid; "80% of collaborations cost under $300." Usage rights add about 40%. A $50 creator exists under 10k followers; campaigns require a $50 minimum even with free product.',
+    '<b>Escrow and the 72-hour clock.</b> "If the creator does not deliver, you receive a full refund" (as balance or to the card); you have 72 hours after delivery to request revisions or dispute, then it auto-completes and the creator is paid after a 10-day buffer.',
+    '<b>You run it.</b> "We are not an agency. We are a platform for you to advertise your services, and manage your own brand deals." Product shipping and loss are yours; "Collabstr is not responsible for any products that are lost, damaged, or not returned."',
+    '<b>What their customers complain about</b> (Trustpilot 4.5, mostly creators): "unable to create a single campaign without paying $300," filters locked without a subscription, a $7,000 non-delivery recovered "minus the small transaction fee," fake-follower reports.'
+   ],
+   better:[
+    '<b>Price against the market average.</b> Collabstr’s own numbers put a posted TikTok at $205 and a UGC file at $169 before product, 2x to 3x our per creator.',
+    '<b>Labor.</b> Collabstr says it is not an agency; Pro allows one campaign post a month. We source, brief, chase, review and verify.',
+    '<b>No 72-hour clock to miss, no auto-approval, no account-balance refunds.</b>'
+   ],
+   honest:['Zero commitment and a full refund on non-delivery: "We do not charge you until an influencer accepts your order."','1.2 million listed creators with public prices across Instagram, TikTok, YouTube, Twitch and X in 35 countries, including big accounts.','Published benchmark data brands trust and will quote back at us.'],
+   price:{ self15:'$80 to $230', self100:'$80 to $220', man15:'none', man100:'none', selfNote:'A $50 creator plus 10% plus 30 minutes of your time at $50 an hour: $80. At Collabstr’s own $186 TikTok average: $230. Premium’s 5% only beats Free above about $8,000 a month of orders.', manNote:'Enterprise "starting at $1,000/month on an annual contract" adds subaccounts and a "dedicated strategic team," not a run-it-for-you service.', how:'<b>How they get to "$50 a video."</b> Sub-10k creators list $50 packages. You find, brief, ship, chase and review each one inside the 72-hour window.' },
+   steal:['<b>Public price benchmarks.</b> An annual report and price calculators that brands cite; we should publish our own per-post number the same way.','<b>Charge on acceptance, escrow to approval.</b> The brand’s money is never at risk for a no-show.','<b>Rights as a line item.</b> Their data says rights add 39.91%; a clean way to price our 90-day paid rights.'],
+   think:'Collabstr’s average collaboration price fell from $214 (2024) to $154 to $193 (2026): creator supply is growing faster than demand. Self-serve prices are deflating; the price of someone running it for you is not.',
+   obj:[['I can find $50 creators on Collabstr.','You can, under 10k followers, and then brief, ship, chase and review each one inside a 72-hour clock, one campaign post a month on the $249 plan. We are $60 to $73 with that done.'],['Escrow means no risk.','Escrow refunds the fee, credited to your Collabstr balance. The product you shipped and the month you planned are gone. If a Benable creator flakes, they are charged for the product and replaced.'],['They have bigger creators.','They do, at $300 to $1,000 a post. Our model is 10 to 100 micro creators posting every month, which is what moves a small brand.']],
+   src:'collabstr.com pricing, terms, FAQ, 2025 and 2026 Influencer Marketing Reports, knowledge base, read Sep 9 2026. Demo Thu Sep 17.' },
+
+ { id:'billo', name:'Billo', tag:'Pay-per-video content shop; managed "starting at $2,000 / month"',
+   learned:[
+    '<b>Brief, applicants, a finished file.</b> You post a brief (15 to 120 seconds, script mode, creator preferences), non-influencer creators apply ("no social media presence required"), you pick, ship within 2 days, and buy the video from a prepaid balance; Billo quality-checks it, then you have 3 business days to approve or request edits before auto-approval.',
+    '<b>Pricing.</b> The public pricing page now redirects to a login. Entry price in 2026 listings: $99 per 15-second video from a regular creator ($59 in 2025); several sources now cite $110 to $120. Prepaid packs from $500 (+$50 bonus) to $30,000, valid 12 months. Optional CreativeOps subscription $500 a month; managed service "starting at $2,000 / month."',
+    '<b>Creator pay.</b> Billo sets it: "$30 for new creators and $70 for premium creators" for a 15-second video, about 30% of the $99. Photos add $40; extras keep 80%.',
+    '<b>Posting is an add-on.</b> By default "Billo creators do not post videos on their personal social media accounts." Organic posting (30 days) and partnership-ad permissions are creator-set fees nobody outside a login can quote.',
+    '<b>Refunds.</b> Unused balance refundable within 30 days, then a 25% administration fee; balances expire at 12 months; no refund for a delivered video you dislike.',
+    '<b>What their customers complain about</b> (Trustpilot 4.0, 520): "applying a 300% markup," "your funds expire, no extensions," auto-approval closing the door on fixes, support latency.'
+   ],
+   better:[
+    '<b>Reach.</b> A Billo video is a file from someone with no audience, and nobody posts it. Ours is a creator posting to their own followers plus a Benable recommendation.',
+    '<b>Price per posted creator.</b> Billo’s posted equivalent is plausibly 2x to 4x, and its own creators have no following.',
+    '<b>Billing calm.</b> No expiring balance, no 25% refund fee, no add-on meter; Billo’s loudest 2026 complaints are expiry and markup.'
+   ],
+   honest:['Owned ad assets: perpetual IP assignment at $0, downloadable 1080p files, 2 plus 2 revisions, b-roll and hooks for sale, 90 and 120-second formats.','Speed and no subscription: days, not a monthly cohort; $99 to try.','Scale and proof: "22,000+ brands," "326k+ video ads," a creative-analytics layer.'],
+   price:{ self15:'$124 per file', self100:'$109 per file', man15:'from $2,000 / mo', man100:'not public', selfNote:'$99 for a file plus 30 minutes of your time at $50 an hour; with the $2,500 pack bonus about $84 a file. A posted video adds a creator-set fee: plausibly $174 to $274 all in, an estimate until the Sep 16 demo.', manNote:'"Starting at $2,000 / month," cancel after the first month; what volume it includes is not published.', how:'<b>How they get to "$99 a video."</b> A 15-second file from a regular creator, no posting, no edits, from a prepaid pack. Longer videos, premium creators and posting are all extra.' },
+   steal:['<b>Sell extra footage per asset.</b> Creators price b-roll and alternate hooks, the platform adds 25%, the brand buys only what it picks.','<b>Auto-approval with a deadline.</b> Three business days, then the creator is paid; it keeps money moving.','<b>Creator levels with a rate step.</b> Regular $30, premium $70: quality tiering the brand can see.'],
+   think:'Billo raised its entry price about 68% in 18 months and hid the price list; its brands are shopping right now. Billo also just launched a managed tier, which is the segment we sit in.',
+   obj:[['Billo is $99 a video.','For a file. A posted video is a creator-set add-on Billo does not publish; estimates run $174 to $274. Our $60 to $73 is a post to a real audience, all in.'],['We own the content outright.','For ad files, that matters, and Billo is good at it. For organic reach, ownership of a video nobody saw is not the goal.'],['No subscription, we just buy what we need.','Billo balances are prepaid and expire in 12 months, with a 25% fee on refunds after 30 days. Our monthly price is the whole price.']],
+   src:'billo.app help center, terms (Jun 1 2026), blog Sep 4 2026 (creator payouts), read Sep 9 2026; $99 entry from four 2026 listings since the pricing page redirects to login; Trustpilot brand reviews 2025 to 2026. Demo Wed Sep 16.' }
+];
+
+/* ---- What the price includes (exact, from the platforms' own pages and Maricarmen's Sep 11 study) ---- */
+const BEN_INCLUDES = {
+  rights:'<b>Organic resharing rights included.</b> Paid usage rights are secured creator by creator when you want a piece for ads or your site ($50 to $100 per creator in current deals).',
+  also:'Creator sourcing from a 1.3 million-creator community with profiles, linked socials and a fit note; a required in-feed post on Instagram or TikTok plus a Benable recommendation; invites, briefing, texts, deadlines, receipts, content review, link checking and post tracking by our ops team; you approve every creator and the brief; gifting through your Shopify store; card on file, 90%+ post rate, flakes charged for the product and replaced.',
+  no:'Paid usage rights by default, Spark or partnership ad codes, content-only files, the product you gift.'
+};
+const INCLUDES = {
+  joinbrands:{ rights:'<b>Perpetual usage rights on every approved video, at any price including $25, no extra fee at any tier</b>, plus a TikTok Spark code collected at upload (one year, renewable) and Instagram partnership codes.', also:'JoinBrands pre-checks each video against your brief; escrow, with the fee and the reimbursement returned if you cancel a late creator; revisions 1 / 2 / 3 / 10 by plan; Full HD on Free, 4K on paid; a $30 / $90 / $150 monthly credit on paid plans.', no:'The product (reimbursed at retail plus 10% tax, or shipped), the 8% to 15% fee on every job, the 20% the creator gives up, your time, the $4,000 a month managed service.' },
+  socialcat:{ rights:'<b>Content usage rights for all content on every tier: worldwide, perpetual, royalty-free, ads included.</b>', also:'Unlimited content per collaboration; inbox, contracts, content library, creator reviews, private notes; 1,000 / 2,500 / 5,000 invitations a month; 1 / 3 / unlimited campaigns; 1 / 5 / 10 seats; Pro adds priority support, a Top Brand badge and "Replace Matches."', no:'Product and shipping; creator fees on paid collabs (off-platform); any management; any refund or guarantee when a creator does not deliver.' },
+  homefromcollege:{ rights:'<b>The form contract assigns all IP to you, including paid media, plus name, likeness, voice and social handles</b>; Spark and Instagram ad codes via how-to guides at no extra pay.', also:'Workspace, payments, analytics, applicant matching on every plan; GIG Guru from Standard; Shopify integration and recruitment assistance on Scale and Premium.', no:'Student pay (guidance $75 to $100 a video) plus the 20% fee (10% on Premium); product or reimbursement; any management below the $15K Premium tier; a replacement when a student drops.' },
+  insense:{ rights:'<b>Perpetual digital rights on every paid deliverable, paid use and CTV included</b>; raw footage as a brief option. Spark and partnership ad fees are extra, priced monthly by the creator.', also:'Brand plan: unlimited creators and campaigns, 2 seats, 10 partnership-ad connections; 3 revisions; escrow on approval; moderation and creator chat; money back only if fewer than 5 creators apply.', no:'Creator payments (from $100 content-only, $125 posted) plus the 20% / 10% / 7% fee; product and shipping; the $2,500 a month platform manager; the screening and chasing.' },
+  kale:{ rights:'<b>Creators grant Kale a perpetual, sublicensable, worldwide license "for any purpose"; the brand-facing license is not public.</b>', also:'Kale runs the challenge, pays customers per post from your reward pool, verifies purchase by receipt or a linked card.', no:'Any promised count, any choice of creator, any brief beyond the checklist; whether a fee sits on top of the reward pool is unknown.' },
+  collabstr:{ rights:'<b>Usage rights only if the order says so</b>; otherwise a license to approve the content and nothing more. Collabstr’s own data: rights add about 40%.', also:'Escrow with a full refund if the creator does not deliver; identity and fake-follower vetting; unlimited revisions within the brief; payouts and tax forms to 150 countries; Pro adds one campaign post a month, filters and live analytics for 5 posts; Premium 15 posts and a 5% fee.', no:'The creator’s price (2026 averages $154 to $193) plus the 10% hiring fee and the 15% the creator pays; product and shipping; any management ("not an agency").' },
+  billo:{ rights:'<b>A perpetual, worldwide IP assignment on payment.</b> Ad permissions and posting are separate creator-set 30-day add-ons.', also:'The finished file at 1080p or better; Billo’s quality check; 2 reshoots and 2 edits; basic editing; you pick the creator; Premium creators at a higher price.', no:'Posting to the creator’s account, Spark and partnership permissions, raw footage and extras (plus 25%), expert editing ($89), product and shipping, your time; balances expire after 12 months.' }
+};
+
+const state = { mode:'sales', bp:'preferred', layout:'tony' };
+function renderSheet(){
+  const b = BEN_SHEET[state.bp];
+  document.getElementById('stack').innerHTML = CARDS_SHEET.map(c => `
+  <article class="card" id="${c.id}">
+    <div class="front">
+    <div class="head">${LOGO}<h1>Benable <em>vs</em> ${c.name}</h1><div class="meta">Sales sheet layout<br>Prices checked Sep 9 2026; JoinBrands demo Sep 10; v2 draft Sep 12</div></div>
+    <div class="strip"><div><b>${c.name}</b>${c.them}</div><div class="us"><b>Benable</b>${US_LINE}</div></div>
+    <div class="price">
+      <div class="tile us"><div class="who">Benable</div><div class="big num">${b.big}</div><div class="unit">${b.unit}</div><div class="sub">${b.sub}</div></div>
+      <div class="tile"><div class="who">${c.name}</div><div class="big num">${c.big}</div><div class="unit">${c.unit}</div><div class="sub">${c.sub}</div></div>
+    </div>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th>Benable</th><th>${c.name}</th></tr></thead>
+      <tbody>
+        <tr><td>Creator fee and platform fee</td><td class="us">None and none; creators receive your product</td><td>${c.rows[1][1]}; ${c.rows[2][1].charAt(0).toLowerCase()+c.rows[2][1].slice(1)}</td></tr>
+        <tr><td>What the price includes</td><td class="us">${BEN_INCLUDES.rights} Not included by default: Spark or partnership codes, content-only files.</td><td>${INCLUDES[c.id].rights} ${INCLUDES[c.id].also}</td></tr>
+        <tr><td>Who does the work</td><td class="us">Benable’s team: invites, briefing, texts, deadlines, receipts, review, post tracking. You approve creators and ship.</td><td>${c.rows[3][1]}</td></tr>
+        <tr><td>$2,000 a month buys</td><td class="us">${b.twok}</td><td>${c.rows[4][1]}</td></tr>${c.rows[5]?`<tr><td>${c.rows[5][0]}</td><td class="us">${b.at100}</td><td>${c.rows[5][1]}</td></tr>`:''}
+      </tbody>
+    </table></div>
+    <div class="cols">
+      <div class="box us"><h3>What Benable’s price includes</h3><ul><li><b>One flat price.</b> No creator fees, no platform fee, no per-campaign fee; the only other cost is the product you gift, which you would ship on any platform.</li><li><b>Hand-picked creators you approve,</b> contracted to an in-feed post plus a Benable recommendation, card on file: 90%+ post rate, flakes charged for the product and replaced.</li><li><b>Our ops team:</b> invites, briefing, texts, deadlines, receipts, review, link checking, post tracking; Shopify gifting. MD Solar: 100+ hours a month to about 3.</li><li>${BEN_INCLUDES.rights}</li></ul></div>
+      <div class="box them"><h3>Where ${c.name} is strong, and what to say</h3><ul>${c.strong.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+    </div>
+    <div class="line"><b>The line</b>${c.line}</div>
+    <div class="foot"><div><span class="tag">Internal draft v2</span>Product cost is excluded on both sides: every platform has you ship or reimburse the product. Competitor prices are at 10 to 15 videos a month with any subscription spread across them.</div><div>Benable, Sep 2026</div></div>
+    </div>
+    <div class="back">
+      <h2>Talk track: Benable vs ${c.name}</h2>
+      <div class="obj">${c.obj.map(o=>`<div><b>${o[0]}</b>${o[1]}</div>`).join('')}</div>
+      <div class="src"><b>Sources.</b> ${c.src} Benable: Tony’s Sep 8 2026 package email. Full study: juliabenable.github.io/competitor-pricing-study-1</div>
+      <div class="foot"><div><span class="tag">Sales only</span>Do not hand this side to a prospect.</div><div>Benable, Sep 2026</div></div>
+    </div>
+  </article>`).join('');
+  document.getElementById('nav').innerHTML = CARDS_SHEET.map(c=>`<a href="#${c.id}">${c.name}</a>`).join('');
+  document.body.className = 'mode-' + state.mode;
+}
+function renderTony(){
+  const b = BEN_TONY[state.bp];
+  document.getElementById('stack').innerHTML = CARDS_TONY.map(c => `
+  <article class="card" id="${c.id}">
+    <div class="front">
+    <div class="head">${LOGO}<h1>Benable <em>vs</em> ${c.name}</h1><div class="meta">${c.tag}<br>Prices checked Sep 9 2026; JoinBrands demo Sep 10; v2 draft Sep 12</div></div>
+    <div class="sec"><h3>What we learned from ${c.name}</h3><ul>${c.learned.map(l=>`<li>${l}</li>`).join('')}</ul></div>
+    <div class="two">
+      <div class="sec us"><h3>1. Where are we better?</h3><ul>${c.better.map(l=>`<li>${l}</li>`).join('')}</ul><div class="honest"><h4>Where they win today, so we are honest with ourselves</h4><ul>${c.honest.map(l=>`<li>${l}</li>`).join('')}</ul></div></div>
+      <div class="q2"><h3>2. How does the pricing compare?</h3>
+        <div class="ptab"><table>
+          <thead><tr><th>Per post</th><th>${c.name} self-serve, with your time</th><th>${c.name} managed</th><th>Benable</th></tr></thead>
+          <tbody><tr><td>15 a month</td><td class="num">${c.price.self15}</td><td class="num">${c.price.man15}</td><td class="us num">${b.p15}</td></tr>
+          <tr><td>100 a month</td><td class="num">${c.price.self100}</td><td class="num">${c.price.man100}</td><td class="us num">${b.p100}</td></tr></tbody>
+        </table></div>
+        <p><b>Their self-serve vs our managed.</b> ${c.price.selfNote}</p>
+        <p><b>Their managed vs our managed.</b> ${c.price.manNote}</p>
+        <p>${c.price.how}</p>
+        <p class="small" style="color:var(--text-3);margin-top:6px">Benable: ${b.ladder}. Product excluded on both sides: every platform has you ship or reimburse it.</p>
+      </div>
+    </div>
+    <div class="sec incwrap"><h3>What the price includes, exactly</h3><div class="inc"><div><h4>${c.name}</h4><p>${INCLUDES[c.id].rights} ${INCLUDES[c.id].also}</p><p class="muted">Not included: ${INCLUDES[c.id].no}</p></div><div><h4>Benable</h4><p>${BEN_INCLUDES.rights} ${BEN_INCLUDES.also}</p><p class="muted">Not included: ${BEN_INCLUDES.no}</p></div></div></div>
+    </div>
+    <div class="back">
+      <div class="sec steal"><h3>3. What do they do that we should steal?</h3><ul>${c.steal.map(l=>`<li>${l}</li>`).join('')}</ul></div>
+      <div class="think"><b>Something to think about.</b>${c.think}</div>
+      <h2>Talk track: what you will hear, and what to say</h2>
+      <div class="obj">${c.obj.map(o=>`<div><b>${o[0]}</b>${o[1]}</div>`).join('')}</div>
+      <div class="src"><b>Sources.</b> ${c.src} Benable: Tony’s Sep 8 and Sep 10 package emails and his Sep 10 demo notes. Full study: juliabenable.github.io/competitor-pricing-study-1</div>
+      <div class="foot"><div><span class="tag">Internal</span>Structure per Tony’s Sep 10 notes: what we learned, then the three questions. Prospect version hides "where they win," "what to steal" and the talk track.</div><div>Benable, Sep 2026</div></div>
+    </div>
+  </article>`).join('');
+  document.getElementById('nav').innerHTML = CARDS_TONY.map(c=>`<a href="#${c.id}">${c.name}</a>`).join('');
+  document.body.className = 'mode-' + state.mode;
+}
+function render(){ if(state.layout==='tony') renderTony(); else renderSheet(); }
+document.querySelectorAll('[data-layout]').forEach(x=>x.addEventListener('click',()=>{state.layout=x.dataset.layout;document.querySelectorAll('[data-layout]').forEach(y=>y.setAttribute('aria-pressed',y===x));render();}));
+document.querySelectorAll('[data-mode]').forEach(x=>x.addEventListener('click',()=>{state.mode=x.dataset.mode;document.querySelectorAll('[data-mode]').forEach(y=>y.setAttribute('aria-pressed',y===x));document.body.className='mode-'+state.mode;}));
+document.querySelectorAll('[data-bp]').forEach(x=>x.addEventListener('click',()=>{state.bp=x.dataset.bp;document.querySelectorAll('[data-bp]').forEach(y=>y.setAttribute('aria-pressed',y===x));render();}));
+document.getElementById('printbtn').addEventListener('click',()=>window.print());
+render();
+</script>
+</body>
+</html>
