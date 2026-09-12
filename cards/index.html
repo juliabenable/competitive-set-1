@@ -194,15 +194,25 @@ tr:last-child td{border-bottom:none}
   .tile.us,.box.us,.strip div.us,.line,td.us,th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
+
+<style>
+/* top-right switch back to the study */
+.to-study{position:fixed;top:12px;right:20px;z-index:1000;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:8px;background:#7a5cfa;color:#fff;font:600 13px/1 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.12);transition:background 120ms}
+.to-study:hover{background:#5f44d6;color:#fff}
+.to-study span{font-size:11px;font-weight:500;opacity:.85}
+.bar{padding-right:200px}
+@media (max-width:640px){.to-study{top:10px;right:10px;padding:8px 12px}.to-study span{display:none}.bar{padding-right:24px}}
+@media print{.to-study{display:none}}
+</style>
 </head>
 <body class="mode-sales">
+<a class="to-study" href="../">Back to the study <span>Fully Loaded</span></a>
 <div class="bar">
   <div class="t">Benable vs <span>seven one-pagers, two layouts · v2 draft · Sep 12 2026</span></div>
   <span class="lbl">Layout</span><div class="seg" role="group" aria-label="Layout"><button type="button" data-layout="tony" aria-pressed="true">Tony’s three questions</button><button type="button" data-layout="sheet">Sales sheet</button></div>
   <span class="lbl">Version</span><div class="seg" role="group" aria-label="Version"><button type="button" data-mode="sales" aria-pressed="true">Sales</button><button type="button" data-mode="prospect">Prospect</button></div>
   <span class="lbl">Benable price</span><div class="seg" role="group" aria-label="Benable price"><button type="button" data-bp="preferred" aria-pressed="true">Preferred rate (Tony’s $50 at 100)</button><button type="button" data-bp="regular">Regular list</button></div>
   <button type="button" class="btn" id="printbtn">Print all 7</button>
-  <a class="btn" href="../" style="text-decoration:none">Back to the study</a>
   <nav class="nav" id="nav" aria-label="Cards"></nav>
 </div>
 
