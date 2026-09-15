@@ -201,6 +201,15 @@ details.platform-card .card-body{padding:6px 18px 18px; border-top:1px solid var
 details.platform-card summary{padding:10px 16px;}
 details.platform-card summary .name{font-size:14px;}
 details.platform-card summary .kind{font-size:11.5px;}
+
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle;}
+.pill-bucket-gifted{background:#EAF3F2;color:#1F5F5B;}
+.pill-bucket-giftfee{background:#EAF2FC;color:#2D7DD2;}
+.pill-bucket-cash{background:#FDF1E1;color:#95650F;}
+.pill-model{background:#F1EBFC;color:#8B5CF6;}
+.pill-rights-yes{background:#E9F6EF;color:#1F7A4D;}
+.pill-rights-no{background:#FBEAE8;color:#B23A2E;}
+.pill-rights-na{background:#F0F0F0;color:#5A5A5A;}
 </style>
 
 <style>
@@ -325,7 +334,7 @@ details.platform-card summary .kind{font-size:11.5px;}
 
   <div class="cat-group" data-cat="selfserve">
 <details class="platform-card" id="pc-joinbrands">
-      <summary><span class="name">JoinBrands</span><span class="kind">Self-serve marketplace</span></summary>
+      <summary><span class="name">JoinBrands</span><span class="kind">Self-serve marketplace</span><span class="pill pill-bucket-giftfee">Gifted + fee</span><span class="pill pill-model">Self-serve</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p>A marketplace: the brand posts a campaign like a job listing, creators apply, the brand hires with a click and is charged when a creator accepts. 500K+ creators have signed up and been vetted, though most have completed zero jobs; a real search turned up barely 10 Level 3 creators and about 10 Level 2, everyone else Level 1. Confirmed hands-on in a full demo on Sep 10.</p>
         <div class="block-grid">
@@ -388,13 +397,13 @@ details.platform-card summary .kind{font-size:11.5px;}
         </div>
         <div class="flag">
           <b>Worth stealing</b>
-          <p>The reimbursement model itself: it puts the financial risk of a no-show on the creator, not the brand. Also worth copying: collecting usage rights preference at the point a creator already wants their payout, rather than negotiating it upfront. An internal poll suggests up to 40% of our creators would agree with no friction if simply asked.</p>
+          <p>The reimbursement model itself: it puts the financial risk of a no-show on the creator, not the brand. Also worth copying: collecting usage rights preference at the point a creator already wants their payout, rather than negotiating it upfront.</p>
         </div>
       </div>
     </details>
 
 <details class="platform-card" id="pc-insense">
-      <summary><span class="name">Insense</span><span class="kind">Self-serve marketplace with a paid trial</span></summary>
+      <summary><span class="name">Insense</span><span class="kind">Self-serve marketplace with a paid trial</span><span class="pill pill-bucket-giftfee">Gifted + fee</span><span class="pill pill-model">Self-serve</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p>Brand writes a brief with a price range, creators bid inside it, escrow releases on approval. Perpetual paid-use rights on every paid deliverable.</p>
         <div class="block-grid">
@@ -410,7 +419,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-billo">
-      <summary><span class="name">Billo</span><span class="kind">Pay-per-video content shop</span></summary>
+      <summary><span class="name">Billo</span><span class="kind">Pay-per-video content shop</span><span class="pill pill-bucket-cash">Cash for content</span><span class="pill pill-model">Self-serve</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p>Now branded a "creator marketing platform." Brief, non-influencer creators apply, brand ships product, buys a finished 15 to 120 second video from a prepaid Pack. Nothing posts unless the brand buys a creator-priced add-on.</p>
         <div class="block-grid">
@@ -426,7 +435,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-trend">
-      <summary><span class="name">Trend, now soona UGC</span><span class="kind">Fixed-price content marketplace</span></summary>
+      <summary><span class="name">Trend, now soona UGC</span><span class="kind">Fixed-price content marketplace</span><span class="pill pill-bucket-cash">Cash for content</span><span class="pill pill-model">Self-serve</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p><strong>Correction from an earlier pass: this already happened, it isn't a future date.</strong> soona announced Trend.io becoming "soona UGC" and began beta on Apr 30 2026. The credit-pack system described below is soona's own legacy Trend pricing, already being phased out; the live model going into any sales conversation now is the flat per-video price. Brand posts a free brief, creators apply, price is set by creator tier, brand ships product.</p>
         <div class="block-grid">
@@ -442,7 +451,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-collabstr">
-      <summary><span class="name">Collabstr</span><span class="kind">Pay-per-order marketplace</span></summary>
+      <summary><span class="name">Collabstr</span><span class="kind">Pay-per-order marketplace</span><span class="pill pill-bucket-giftfee">Gifted + fee</span><span class="pill pill-model">Self-serve</span><span class="pill pill-rights-na">N/A</span></summary>
       <div class="card-body">
         <p>Creators list fixed-price packages; brand pays the price plus a hiring fee into escrow and gets a full refund on non-delivery. The most transparent price data in the market.</p>
         <div class="block-grid">
@@ -458,7 +467,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-socialcat">
-      <summary><span class="name">Social Cat</span><span class="kind">Self-serve, gifted default</span></summary>
+      <summary><span class="name">Social Cat</span><span class="kind">Self-serve, gifted default</span><span class="pill pill-bucket-gifted">Gifted only</span><span class="pill pill-model">Self-serve</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p>The cheapest way to put product in creators' hands: a subscription buys a monthly cap of "matches," gifted is the default, paid collabs settle off-platform with no fee. Social Cat doesn't manage the collaboration and, in writing, doesn't refund a ghost.</p>
         <div class="block-grid">
@@ -476,7 +485,7 @@ details.platform-card summary .kind{font-size:11.5px;}
 
   <div class="cat-group" data-cat="managed">
 <details class="platform-card" id="pc-minisocial">
-      <summary><span class="name">minisocial</span><span class="kind">Managed micro-influencer + UGC</span></summary>
+      <summary><span class="name">minisocial</span><span class="kind">Managed micro-influencer + UGC</span><span class="pill pill-bucket-giftfee">Gifted + fee</span><span class="pill pill-model">Managed</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p>The managed comparator that pays creators cash. One public number: projects start at $3,000 for a campaign of 10 creators, creator payments included.</p>
         <div class="block-grid">
@@ -492,7 +501,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-stack">
-      <summary><span class="name">Stack Influence</span><span class="kind">Managed, pay per completed post</span></summary>
+      <summary><span class="name">Stack Influence</span><span class="kind">Managed, pay per completed post</span><span class="pill pill-bucket-gifted">Gifted only</span><span class="pill pill-model">Managed</span><span class="pill pill-rights-yes">Rights included (6 months)</span></summary>
       <div class="card-body">
         <p>The closest structural rival to Benable and the cheapest managed fee in the market: $30 flat fee on average per creator post, no monthly subscription. The catch: nano creators (about 2,500 followers average) buy the product at full retail and are reimbursed; the brand can't pick them, minimum 50 to 100 creators per product over two months.</p>
         <div class="block-grid">
@@ -508,7 +517,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-statusphere">
-      <summary><span class="name">Statusphere</span><span class="kind">Managed, "guaranteed posts"</span></summary>
+      <summary><span class="name">Statusphere</span><span class="kind">Managed, "guaranteed posts"</span><span class="pill pill-bucket-gifted">Gifted only</span><span class="pill pill-model">Managed</span><span class="pill pill-rights-yes">Rights included (organic; paid capped at 1 year)</span></summary>
       <div class="card-body">
         <p>The managed platform with the biggest promise and ticket: "guaranteed posts," product fulfilled from their warehouse in 48 hours, entry "starting at $10,000." Per-post price isn't public.</p>
         <div class="block-grid">
@@ -526,7 +535,7 @@ details.platform-card summary .kind{font-size:11.5px;}
 
   <div class="cat-group" data-cat="software">
 <details class="platform-card" id="pc-aspire">
-      <summary><span class="name">Aspire</span><span class="kind">Enterprise SaaS plus agency layer</span></summary>
+      <summary><span class="name">Aspire</span><span class="kind">Enterprise SaaS plus agency layer</span><span class="pill pill-bucket-gifted">Gifted only</span><span class="pill pill-model">SaaS</span><span class="pill pill-rights-na">N/A</span></summary>
       <div class="card-body">
         <p>Discovery, a 1M-creator marketplace, briefs, Shopify gifting, ad permissions. No public pricing page. Vendr median actual spend $15,588/yr ($1,299/mo). <span class="tag claimed">Claimed</span></p>
         <p>Software alone is $130 per posted video at 10/mo. Add the field norm that 61% of gifted product never gets posted, plus labor, and it lands at $280 to $350 per gifted posted video.</p>
@@ -534,7 +543,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-grin">
-      <summary><span class="name">GRIN</span><span class="kind">SaaS, month-to-month credits</span></summary>
+      <summary><span class="name">GRIN</span><span class="kind">SaaS, month-to-month credits</span><span class="pill pill-bucket-gifted">Gifted only</span><span class="pill pill-model">SaaS</span><span class="pill pill-rights-na">N/A</span></summary>
       <div class="card-body">
         <p>Re-priced twice in 2026, now a month-to-month credit ladder fronted by an AI agent, "Gia." Free to $1,500/mo on credits, no annual contract. Growth ($500) covers 10 gifted posts at $50 each, on software alone cheaper than Benable.</p>
         <p>The honest pitch can't be "we're cheaper." It's: our price includes the 25 to 30 hours a month a DIY program costs, and the post-rate risk. GRIN publishes no hours-saved or post-rate data.</p>
@@ -542,7 +551,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-upfluence">
-      <summary><span class="name">Upfluence</span><span class="kind">Modular SaaS, 12-month minimum</span></summary>
+      <summary><span class="name">Upfluence</span><span class="kind">Modular SaaS, 12-month minimum</span><span class="pill pill-bucket-gifted">Gifted only</span><span class="pill pill-model">SaaS</span><span class="pill pill-rights-na">N/A</span></summary>
       <div class="card-body">
         <p>About $125 of software per posted video at 10/mo, $50 at 25, before labor, on a year-long contract with a $695 setup.</p>
       </div>
@@ -551,7 +560,7 @@ details.platform-card summary .kind{font-size:11.5px;}
 
   <div class="cat-group" data-cat="inperson">
 <details class="platform-card" id="pc-hfc">
-      <summary><span class="name">Home From College</span><span class="kind">Gen Z gig marketplace</span></summary>
+      <summary><span class="name">Home From College</span><span class="kind">Gen Z gig marketplace</span><span class="pill pill-bucket-giftfee">Gifted + fee</span><span class="pill pill-model">In-person / gig</span><span class="pill pill-rights-yes">Rights included</span></summary>
       <div class="card-body">
         <p>A brand lists a "GIG," students apply, the brand picks, pays cash through the platform plus 20% on top. In-person work is a mature category: retail creator visits, in-store demos, campus sampling, gameday.</p>
         <div class="block-grid">
@@ -572,7 +581,7 @@ details.platform-card summary .kind{font-size:11.5px;}
     </details>
 
 <details class="platform-card" id="pc-kale">
-      <summary><span class="name">Kale</span><span class="kind">Pays customers, not influencers</span></summary>
+      <summary><span class="name">Kale</span><span class="kind">Pays customers, not influencers</span><span class="pill pill-bucket-cash">Cash for content</span><span class="pill pill-model">In-person / gig</span><span class="pill pill-rights-na">N/A</span></summary>
       <div class="card-body">
         <p>"Reward customers, not influencers." A brand funds a reward pool; Kale's algorithm pays customers who already own the product $10 to $25 per post based on views. No product shipped, no creator picked, no count promised. Brand pricing isn't public.</p>
         <div class="block-grid">
@@ -760,7 +769,7 @@ details.platform-card summary .kind{font-size:11.5px;}
         <li>Labor is inside: self-serve tools push 20 to 250 applicant screens, shipping windows, and chase timers onto the brand</li>
         <li>The post-rate risk is carried, not eaten by the brand</li>
         <li>Billing calm: no expiring credits, no auto-renewals, no 12-month locks, no $10,000 entry</li>
-        <li>A real on-time story taking shape: content guarantee, SMS, and incentive programs like the Collective, against a market where the self-serve norm runs 30% to 40% of jobs late</li>
+        <li>A real on-time story taking shape: content guarantee, SMS, and an incentive program Tony's floated internally (the Collective), not yet built, against a market where the self-serve norm runs 30% to 40% of jobs late</li>
       </ul>
     </div>
     <div class="verdict-box gap">
